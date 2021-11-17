@@ -46,6 +46,6 @@
 
 ## Screenshots:
 
-<img src="http://sitebrush.com/f/1056d0a4560056ede806c06ed818bd1e.png" width="400"> 
+<img src="http://sitebrush.com/f/389b73b76b94f91f86fd942b64ee4686.png" width="400"> <img src="http://sitebrush.com/f/1056d0a4560056ede806c06ed818bd1e.png" width="400"> 
 
-<img src="http://sitebrush.com/f/389b73b76b94f91f86fd942b64ee4686.png" width="400">
+
