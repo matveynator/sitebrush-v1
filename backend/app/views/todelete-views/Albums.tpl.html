@@ -1,0 +1,93 @@
+[[if $Action eq 'Images' or $Action eq 'Albums']]
+[[if $LoggedIn eq "true" ]]
+
+<table><tr><td width="10">&nbsp;</td><td width="700">
+
+  [[section name=DaySection loop=$ImagesInOneAlbum]]
+    [[if $smarty.section.DaySection.iteration eq 1]]
+
+<script type="text/javascript" charset="utf-8">
+
+$(function() {
+    
+  $(".click_[[$ImagesInOneAlbum[DaySection].AlbumId]]").editable("/functions/post/album/rename/[[$ImagesInOneAlbum[DaySection].AlbumId]]", { 
+      indicator : "[[$dic.saving_progress]]",
+      tooltip   : "[[$dic.click_to_edit]]",
+      style  : "inherit",
+  });
+
+});
+
+$(function() {
+
+ $('.select_image_[[$ImagesInOneAlbum[DaySection].imageId]]').editable("/functions/post/image/bind/[[$ImagesInOneAlbum[DaySection].imageId]]", { 
+     data   : '[[$UserAlbumsList]]',
+     indicator : "[[$dic.saving_progress]]",
+     tooltip   : "[[$dic.click_to_edit]]",
+     type   : 'select',
+     submit : '[[$dic.ok]]',
+     style  : "inherit",
+     callback : function() {
+                 window.location.reload();
+                 }
+
+ });
+ });
+</script>
+
+[[$dic.uploaded]] [[$ImagesInOneAlbum[DaySection].HumanDay]] | <b class="click_[[$ImagesInOneAlbum[DaySection].AlbumId]]">
+[[if isset($ImagesInOneAlbum[DaySection].AlbumName)]]
+[[$ImagesInOneAlbum[DaySection].AlbumName]]
+[[else]]
+[[$dic.click_to_rename]]
+[[/if]]
+</b>
+<br>[[$dic.status]]:
+[[if $AlbumStatus eq 'Published']]
+<a href="/function/album/unpublish/[[$AlbumId]]">[[$dic.published]]</a>.
+[[else]]
+<a href="/function/album/publish/[[$AlbumId]]">[[$dic.not_published]]</a>.
+[[/if]]
+[[if $AlbumShowOnFirst eq 'true']]
+<a href="/function/album/unpublishonfirst/[[$AlbumId]]">[[$dic.shown_on_first]]</a>.
+[[else]]
+<a href="/function/album/publishonfirst/[[$AlbumId]]">[[$dic.not_shown_on_first]]</a>. 
+[[/if]]
+<br><br>
+
+
+    <div id="ImageBox229" align="center"><a href="[[$ImageUploadUrl]]/1024/standart/color/[[$ImagesInOneAlbum[DaySection].Hash]].[[$ImagesInOneAlbum[DaySection].Format]]" rel="lightbox-[[$ImagesInOneAlbum[DaySection].AlbumId]]" title="[[$ImagesInOneAlbum[DaySection].Comment]]"><img style="float: left; border:1px solid #ffffff;margin:0px auto; vertical-align: middle;" border="0" src="[[$ImageUploadUrl]]/229/crop/color/[[$ImagesInOneAlbum[DaySection].Hash]].[[$ImagesInOneAlbum[DaySection].Format]]"></a><div id="ImageBoxNavigation229" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0;this.filters.alpha.opacity=0"><div align="center"><a href="[[$PhotosUrl]]/rotate/[[$ImagesInOneAlbum[DaySection].imageId]]"><span class="ImageFont"><</span></a> <span class="ImageFont">|</span> <span class="ImageFont"><span class="select_image_[[$ImagesInOneAlbum[DaySection].imageId]]">b</span></span> <span class="ImageFont">|</span> <a href="[[$PhotosUrl]]/unbind/[[$ImagesInOneAlbum[DaySection].imageId]]"><span class="ImageFont">u</span></a></div></div></div>
+
+    [[/if]]
+
+    [[if $smarty.section.DaySection.iteration != 1]]
+
+<script type="text/javascript" charset="utf-8">
+
+$(function() {
+    
+ $('.select_image_[[$ImagesInOneAlbum[DaySection].imageId]]').editable("/functions/post/image/bind/[[$ImagesInOneAlbum[DaySection].imageId]]", { 
+     data   : '[[$UserAlbumsList]]',
+     indicator : "[[$dic.saving_progress]]",
+     tooltip   : "[[$dic.bind_to_other_album]]",
+     type   : 'select',
+     submit : '[[$dic.ok]]',
+     style  : "inherit",
+     callback : function() {
+                 window.location.reload();
+                 }
+
+ });
+
+});
+
+</script>
+
+<div id="ImageBox" align="center"> <a href="[[$ImageUploadUrl]]/1024/standart/color/[[$ImagesInOneAlbum[DaySection].Hash]].[[$ImagesInOneAlbum[DaySection].Format]]" rel="lightbox-[[$ImagesInOneAlbum[DaySection].AlbumId]]" title="[[$ImagesInOneAlbum[DaySection].Comment]]"><img style="float: left; border:1px solid #ffffff;margin:0px auto; vertical-align: middle;" border="0" src="[[$ImageUploadUrl]]/75/crop/color/[[$ImagesInOneAlbum[DaySection].Hash]].[[$ImagesInOneAlbum[DaySection].Format]]"></a><div id="ImageBoxNavigation" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0;this.filters.alpha.opacity=0"><div align="center"><a href="[[$PhotosUrl]]/rotate/[[$ImagesInOneAlbum[DaySection].imageId]]"><span class="ImageFont"><</span></a> <span class="ImageFont">|</span> <span class="ImageFont"><span class="select_image_[[$ImagesInOneAlbum[DaySection].imageId]]">b</span></span> <span class="ImageFont">|</span> <a href="[[$PhotosUrl]]/unbind/[[$ImagesInOneAlbum[DaySection].imageId]]"><span class="ImageFont">u</span></a></div></div></div>
+    [[/if]]
+  [[/section]]
+
+</td><td width="10">&nbsp;</td></tr></table>
+<br>
+[[/if]]
+[[/if]]

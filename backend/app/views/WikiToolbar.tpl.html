@@ -1,0 +1,395 @@
+<style type="text/css">
+
+#footpanel {
+	position: fixed;
+	bottom: 25px; right: 0px;
+	z-index: 9999; /*--Keeps the panel on top of all other elements--*/
+        [[if $Freezed eq 1]]
+	background: #e6fafd;
+        border: 1px solid #c4dfe2;
+        [[else]]
+	background: #e3e2e2;
+        border: 1px solid #bbb;
+        [[/if]]
+	[[if $LoggedIn eq TRUE ]]
+	width: 270px;
+	[[else]]
+	width: 26px;
+	[[/if]]
+	margin: 0 3%;
+}
+
+*html #footpanel { /*--IE6 Hack - Fixed Positioning to the Bottom--*/
+	margin-top: -1px; /*--prevents IE6 from having an infinity scroll bar - due to 1px border on #footpanel--*/
+	position: absolute;
+	top:expression(eval(document.compatMode &&document.compatMode=='CSS1Compat') ?documentElement.scrollTop+(documentElement.clientHeight-this.clientHeight) : document.body.scrollTop +(document.body.clientHeight-this.clientHeight));
+}
+
+#footpanel ul {
+	padding: 0; margin: 0;
+	float: left;
+	width: 100%;
+	list-style: none;
+	border-top: 1px solid #fff; /*--Gives the bevel feel on the panel--*/
+	font-size: 1.1em;
+}
+#footpanel ul li{
+	padding: 0; margin: 0;
+	float: left;
+	position: relative;
+}
+#footpanel ul li a{
+	padding: 5px;
+	float: left;
+	text-indent: -9999px;
+	height: 16px; width: 16px;
+	text-decoration: none;
+	color: #333;
+	position: relative;
+}
+html #footpanel ul li a:hover{	background-color: #fff; }
+html #footpanel ul li a.active { /*--Active state when subpanel is open--*/
+	background-color: #fff;
+	height: 17px;
+	margin-top: -2px; /*--Push it up 2px to attach the active button to subpanel--*/
+	border: 1px solid #555;
+	border-top: none;
+	z-index: 200; /*--Keeps the active area on top of the subpanel--*/
+	position: relative;
+}
+
+
+#footpanel a.up{	
+	background: url(http://[[$Domain]]/[[$StaticFolder]]/static/arrow-left-up.png) no-repeat center center;
+        [[if $Freezed eq 1]]
+	border-right: 1px solid #c4dfe2;
+        [[else]]
+	border-right: 1px solid #bbb;
+        [[/if]]
+	text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.edit{        
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/pencil.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.properties{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/cog.png) no-repeat center center;
+        [[if $Freezed eq 1]]
+        border-right: 1px solid #c4dfe2;
+        [[else]]
+        border-right: 1px solid #bbb;
+        [[/if]]
+        text-indent: 0; /*--Reset text indent--*/
+}  
+
+#footpanel a.delete{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/cross.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.freeze{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/freeze.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.unfreeze{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/publish.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+
+#footpanel a.revision{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/revisions.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.deleted{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/arrow_undo.png) no-repeat center center;
+        [[if $Freezed eq 1]]
+        border-right: 1px solid #c4dfe2;
+        [[else]]
+        border-right: 1px solid #bbb;
+        [[/if]]
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.subpages{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/tree.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.new_subpage{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/add.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.copy{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/copy.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+}
+
+#footpanel a.profile{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/profile.png) no-repeat center center;
+        text-indent: 0; /*--Reset text indent--*/
+        [[if $Freezed eq 1]]
+        border-left: 1px solid #c4dfe2;
+        [[else]]
+        border-left: 1px solid #bbb;
+        [[/if]]
+
+}
+
+#footpanel a.sign-out{
+        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/sign-out.png) no-repeat right center;
+        [[if $Freezed eq 1]]
+        border-left: 1px solid #c4dfe2;
+        [[else]]
+        border-left: 1px solid #bbb;
+        [[/if]]
+        text-indent: 0; /*--Reset text indent--*/
+	width: 40px;
+}
+
+
+
+#footpanel a small {  /*--panel tool tip styles--*/
+	text-align: center;
+	width: 110px;
+	background: url(http://[[$Domain]]/[[$StaticFolder]]/static/pop_arrow.png) no-repeat center bottom;
+	padding: 5px 5px 11px;
+	display: none; /*--Hide by default--*/
+	color: #fff;
+	font-size: 1em;
+        font: 10px normal Verdana, Arial, Helvetica, sans-serif;
+	text-indent: 0;
+}
+#footpanel a:hover small{
+	display: block; /*--Show on hover--*/
+	position: absolute;
+	top: -60px; /*--Position tooltip 35px above the list item--*/
+	left: 20%; 
+	margin-left: -50px; /*--Center the tooltip--*/
+	z-index: 9999;
+}
+
+
+
+
+
+#footpanel ul li div a { /*--Reset link style for subpanel links--*/
+	text-indent: 0;
+	width: auto;
+	height: auto;
+	padding: 0;
+	float: none;
+	color: #00629a;
+	position: static;
+}
+#footpanel ul li div a:hover {	text-decoration: underline; } /*--Reset link style for subpanel links--*/
+
+#footpanel .subpanel {
+	position: absolute;
+	left: 0; bottom: 27px;
+	display: none;	/*--Hide by default--*/
+	width: 198px;
+	border: 1px solid #555;
+	background: #fff;
+	overflow: hidden;
+	padding-bottom: 2px;
+}
+#footpanel h3 {
+	background: #526ea6;
+	padding: 5px 10px;
+	color: #fff;
+	font-size: 1.1em;
+	cursor: pointer;
+}
+#footpanel h3 span { 
+	font-size: 1.5em;
+	float: right;
+	line-height: 0.6em;	
+	font-weight: normal;
+}
+#footpanel .subpanel ul{
+	padding: 0; margin: 0;
+	background: #fff;
+	width: 100%;
+	overflow: auto;
+}
+#footpanel .subpanel li{ 
+	float: none; /*--Reset float--*/
+	display: block;
+	padding: 0; margin: 0;
+	overflow: hidden;
+	clear: both;
+	background: #fff;
+	position: static;  /*--Reset relative positioning--*/
+	font-size: 0.9em;
+}
+
+#chatpanel .subpanel li { background: url(dash.gif) repeat-x left center; } 
+#chatpanel .subpanel li span {
+	padding: 5px;
+	background: #fff;
+	color: #777;
+	float: left;
+}
+#chatpanel .subpanel li a img {
+	float: left;
+	margin: 0 5px;
+}
+#chatpanel .subpanel li a{
+	padding: 3px 0;	margin: 0;
+	line-height: 22px;
+	height: 22px;
+	background: #fff;
+	display: block;
+}
+#chatpanel .subpanel li a:hover {
+	background: #3b5998;
+	color: #fff;
+	text-decoration: none;
+}
+
+
+#alertpanel .subpanel { right: 0; left: auto; /*--Reset left positioning and make it right positioned--*/ }
+#alertpanel .subpanel li {
+	border-top: 1px solid #f0f0f0;
+	display: block;
+}
+#alertpanel .subpanel li p {padding: 5px 10px;}
+#alertpanel .subpanel li a.delete{
+	background: url(delete_x.gif) no-repeat;
+	float: right;
+	width: 13px; height: 14px;
+	margin: 5px;
+	text-indent: -9999px;
+	visibility: hidden; /*--Hides by default but still takes up space (not completely gone like display:none;)--*/
+}
+#alertpanel .subpanel li a.delete:hover { background-position: left bottom; }
+#footpanel #alertpanel li.view {
+	text-align: right;
+	padding: 5px 10px 5px 0;
+}
+</style>
+<script type="text/javascript"> 
+$(document).ready(function(){
+
+	//Adjust panel height
+	$.fn.adjustPanel = function(){ 
+		$(this).find("ul, .subpanel").css({ 'height' : 'auto'}); //Reset subpanel and ul height
+		
+		var windowHeight = $(window).height(); //Get the height of the browser viewport
+		var panelsub = $(this).find(".subpanel").height(); //Get the height of subpanel	
+		var panelAdjust = windowHeight - 100; //Viewport height - 100px (Sets max height of subpanel)
+		var ulAdjust =  panelAdjust - 25; //Calculate ul size after adjusting sub-panel (27px is the height of the base panel)
+		
+		if ( panelsub >= panelAdjust ) {	 //If subpanel is taller than max height...
+			$(this).find(".subpanel").css({ 'height' : panelAdjust }); //Adjust subpanel to max height
+			$(this).find("ul").css({ 'height' : ulAdjust}); //Adjust subpanel ul to new size
+		}
+		else if ( panelsub < panelAdjust ) { //If subpanel is smaller than max height...
+			$(this).find("ul").css({ 'height' : 'auto'}); //Set subpanel ul to auto (default size)
+		}
+	};
+	
+	//Execute function on load
+	$("#chatpanel").adjustPanel(); //Run the adjustPanel function on #chatpanel
+	$("#alertpanel").adjustPanel(); //Run the adjustPanel function on #alertpanel
+	
+	//Each time the viewport is adjusted/resized, execute the function
+	$(window).resize(function () { 
+		$("#chatpanel").adjustPanel();
+		$("#alertpanel").adjustPanel();
+	});
+	
+	//Click event on Chat Panel + Alert Panel	
+	$("#chatpanel a:first, #alertpanel a:first").click(function() { //If clicked on the first link of #chatpanel and #alertpanel...
+		if($(this).next(".subpanel").is(':visible')){ //If subpanel is already active...
+			$(this).next(".subpanel").hide(); //Hide active subpanel
+			$("#footpanel li a").removeClass('active'); //Remove active class on the subpanel trigger
+		}
+		else { //if subpanel is not active...
+			$(".subpanel").hide(); //Hide all subpanels
+			$(this).next(".subpanel").toggle(); //Toggle the subpanel to make active
+			$("#footpanel li a").removeClass('active'); //Remove active class on all subpanel trigger
+			$(this).toggleClass('active'); //Toggle the active class on the subpanel trigger
+		}
+		return false; //Prevent browser jump to link anchor
+	});
+	
+	//Click event outside of subpanel
+	$(document).click(function() { //Click anywhere and...
+		$(".subpanel").hide(); //hide subpanel
+		$("#footpanel li a").removeClass('active'); //remove active class on subpanel trigger
+	});
+	$('.subpanel ul').click(function(e) { 
+		e.stopPropagation(); //Prevents the subpanel ul from closing on click
+	});
+	
+	//Delete icons on Alert Panel
+	$("#alertpanel li").hover(function() {
+		$(this).find("a.delete").css({'visibility': 'visible'}); //Show delete icon on hover
+	},function() {
+		$(this).find("a.delete").css({'visibility': 'hidden'}); //Hide delete icon on hover out
+	});
+
+
+
+
+
+	
+});
+</script>
+
+
+
+
+<div id="footpanel">
+	<ul id="mainpanel">    	
+	[[if $LoggedIn eq TRUE ]]
+	[[if $RequestUri neq '/']]
+        <li><a href="http://[[$Domain]][[$PrePageUri]]" class="up"><small>Go one page up</small></a></li>
+	[[/if]]
+	[[/if]]
+	<li><a href="?edit" class="edit"><small>Edit</small></a></li>
+	[[if $LoggedIn eq TRUE ]]
+        [[if $PageVersion > 0]]
+        <li><a href="?delete=[[$PageId]]" class="delete"><small><font color="red">Delete</font></small></a></li>
+        [[/if]]
+        
+	[[if $PageVersion > 0]]
+	<li><a href="?revisions" class="revision"><small>Revisions: (<b>[[$PageVersion]]</b>)</small></a>
+	</li>
+
+	[[else]]
+		 [[if isset($DeletedRevisions)]]
+		<li><a href="?revisions" class="deleted"><small>Deleted: (<s><b>[[$DeletedRevisions]]</b></s>)</small></a></li>
+		 [[/if]]
+	[[/if]]
+
+        [[if $PageVersion > 0]]
+        <li><a href="?properties" class="properties"><small>Properties</small></a></li>
+        [[/if]]
+
+	[[if $PageVersion > 0]]
+        <li><a href="http://[[$Domain]][[$NewUniqSubUri]]?edit" class="new_subpage"><small>Create new subpage</small></a></li>
+	[[/if]]
+
+	[[if $SubUriAmmount > 0]]
+        <li><a href="?subpages" class="subpages"><small>Subpages: (<b>[[$SubUriAmmount]]</b>)</small></a></li>
+	[[/if]]
+	<li><a href="?profile" class="profile"><small>Profile</small></a></li>
+        [[if $Freezed eq 1]]
+        <li><a href="?unfreeze" class="unfreeze"><small>Publish current site</small></a></li>
+        [[else]]
+        <li><a href="?freeze" class="freeze"><small>Freeze current site</small></a></li>
+        [[/if]]
+
+        <li><a href="?logout" class="sign-out"><small>Sign Out</small></a></li>
+	[[/if]]
+        
+	</ul>
+</div>

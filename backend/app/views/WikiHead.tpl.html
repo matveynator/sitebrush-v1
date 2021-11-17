@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Powered by SiteBrush | http://sitebrush.com/ -->
+<html>
+<head>
+[[if $Title != ""]]
+<title>Редактирование: [[$Title]]</title>
+[[/if]]
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+<script src="http://[[$Domain]]/[[$StaticFolder]]/js/jquery/jquery.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<script src="http://[[$Domain]]/[[$StaticFolder]]/js/standalone/ckeditor/ckeditor_source.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<script charset="utf-8" language="javascript" type="text/javascript">
+
+CKEDITOR.on('instanceReady',
+		function( evt )
+		{
+		var editor = evt.editor;
+		editor.execCommand('maximize');
+		[[if $Action eq TemplateEditor]]
+		editor.execCommand('source');
+		[[/if]]
+
+		});
+</script>
+<script charset="utf-8" language="javascript" type="text/javascript">
+
+CKEDITOR.editorConfig = function( config )
+{
+	config.language = 'ru',
+		config.tabSpaces = '4',
+		config.fullPage = false,
+		config.uiColor = '#ffffff',
+		config.colorButton_enableMore = true,
+		[[if $Action eq TemplateEditor]]
+			config.colorButton_enableMore = true;
+	config.htmlEncodeOutput = false;
+	config.protectedSource.push( /[+\$[\s\S]*?]+/g );
+	[[/if]]
+		config.toolbar_Full =
+		[
+		['Source','-','Save','NewPage','Preview','-','Templates'],
+		['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker', 'Scayt'],
+		['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+		['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+		'/',
+		['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+		['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+		['Link','Unlink','Anchor'],
+		['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak', 'Iframe'],
+		'/',
+		['Styles','Format','Font','FontSize'],
+		['TextColor','BGColor'],
+		['Maximize']
+			]
+};
+</script>
+
+</head>

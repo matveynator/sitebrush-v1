@@ -1,0 +1,12 @@
+SET AUTOCOMMIT=0;
+SET FOREIGN_KEY_CHECKS=0;
+delete from `domain` where status='Trashed';
+delete from `invite` where status='Trashed';
+delete from `language` where status='Trashed';
+delete from `message` where status='Trashed';
+delete from `post` where status='Trashed';
+delete from `template` where status='Trashed';
+delete from `uri` where status='Trashed';
+delete from `user` where status='Trashed';
+delete from `media` where status='Trashed';
+delete from `group` where status='Trashed';

@@ -1,0 +1,9 @@
+issue:
+
+propel-gen 
+
+or:
+
+propel-gen om
+propel-gen sql
+propel-gen insert-sql

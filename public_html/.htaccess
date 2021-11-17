@@ -1,0 +1,8 @@
+#ATTENTION!!!
+#Please redirect https to http if certificate is self-signed.
+#php_value upload_max_filesize 32M
+#php_value post_max_size 32M
+RewriteEngine on
+#redirect all except files to php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php

@@ -1,0 +1,123 @@
+[[section name=Comment loop=$Comments]]
+                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; ">
+                        <tbody>
+                                <tr valign="top">
+                                        <td align="center" style="width: 110px; " valign="top">
+					        [[if $smarty.section.Comment.last]]
+					                <a name="l"></a>
+					        [[/if]]
+						<a name="[[$Comments[Comment].Timestamp]]"></a>
+
+                                                <a href="http://[[$Comments[Comment].NickName]].[[$Domain]]"><img border='0' width='50' src="/f/[[$Comments[Comment].AvatarHash]].[[$Comments[Comment].AvatarFormat]]"></a><br>
+						<span style="font-size:12px;">
+							<a href="http://[[$Comments[Comment].NickName]].[[$Domain]]">[[$Comments[Comment].NickName]]</a><br>
+                [[if ($_SESSION.LoggedIn == TRUE) and ($_SESSION.UserId != $Comments[Comment].CommenterId)]]
+                <br>
+                        <a href="#" onclick="openWin('http://[[$Domain]]/messenger/[[$Comments[Comment].CommenterId]]', '[[$Comments[Comment].CommenterId]]', '500', '550');"><img width="13" height="13" src="/f/sms.gif" alt="messenger" border="0"></a>
+                [[/if]] 
+						</span>
+						
+					</td>
+                                        <td>
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 100%; ">
+                                                        <tbody>
+                                                                <tr>
+                                                                        <td align="left" valign="middle">
+                                                                                <span style="font-size:10px;">[[$Comments[Comment].Date]]</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td  align="left" valign="top">
+[[if $Comments[Comment].Editable == TRUE]]
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+<script src="/js/ckeip.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<!-- <script src="/js/editor/ckeditor.js" charset="utf-8" language="javascript" type="text/javascript"></script> -->
+<script type="text/javascript">
+(function(){CKEDITOR.config.jqueryOverrideVal=typeof CKEDITOR.config.jqueryOverrideVal=='undefined'?true:CKEDITOR.config.jqueryOverrideVal;var a=window.jQuery;if(typeof a=='undefined')return;a.extend(a.fn,{ckeditorGet:function(){var b=this.eq(0).data('ckeditorInstance');if(!b)throw 'CKEditor not yet initialized, use ckeditor() with callback.';return b;},ckeditor:function(b,c){if(!a.isFunction(b)){var d=c;c=b;b=d;}c=c||{};this.filter('textarea, div, p').each(function(){var e=a(this),f=e.data('ckeditorInstance'),g=e.data('_ckeditorInstanceLock'),h=this;if(f&&!g){if(b)b.apply(f,[this]);}else if(!g){if(c.autoUpdateElement||typeof c.autoUpdateElement=='undefined'&&CKEDITOR.config.autoUpdateElement)c.autoUpdateElementJquery=true;c.autoUpdateElement=false;e.data('_ckeditorInstanceLock',true);f=CKEDITOR.replace(h,c);e.data('ckeditorInstance',f);f.on('instanceReady',function(i){var j=i.editor;setTimeout(function(){if(!j.element){setTimeout(arguments.callee,100);return;}i.removeListener('instanceReady',this.callee);j.on('dataReady',function(){e.trigger('setData.ckeditor',[j]);});j.on('getData',function(l){e.trigger('getData.ckeditor',[j,l.data]);},999);j.on('destroy',function(){e.trigger('destroy.ckeditor',[j]);});if(j.config.autoUpdateElementJquery&&e.is('textarea')&&e.parents('form').length){var k=function(){e.ckeditor(function(){j.updateElement();});};e.parents('form').submit(k);e.parents('form').bind('form-pre-serialize',k);e.bind('destroy.ckeditor',function(){e.parents('form').unbind('submit',k);e.parents('form').unbind('form-pre-serialize',k);});}j.on('destroy',function(){e.data('ckeditorInstance',null);});e.data('_ckeditorInstanceLock',null);e.trigger('instanceReady.ckeditor',[j]);if(b)b.apply(j,[h]);},0);},null,null,9999);}else CKEDITOR.on('instanceReady',function(i){var j=i.editor;setTimeout(function(){if(!j.element){setTimeout(arguments.callee,100);return;}if(j.element.$==h)if(b)b.apply(j,[h]);},0);},null,null,9999);});return this;}});if(CKEDITOR.config.jqueryOverrideVal)a.fn.val=CKEDITOR.tools.override(a.fn.val,function(b){return function(c,d){var e=typeof c!='undefined',f;this.each(function(){var g=a(this),h=g.data('ckeditorInstance');if(!d&&g.is('textarea')&&h){if(e)h.setData(c);else{f=h.getData();return null;}}else if(e)b.call(g,c);else{f=b.call(g);return null;}return true;});return e?this:f;};});})();
+
+$(document).ready(function() {
+
+$('#edit_[[$Comments[Comment].Id]]').ckeip({
+e_url: '/comment/[[$Comments[Comment].Id]]',
+e_hover_color:"[[$CustomDesign.LinkColor]]",
+
+ckeditor_config : {
+
+language: 'ru_RU',
+uiColor: '[[$CustomDesign.ckeditor_color]]',
+fullPage: 'False',
+width: '95%',
+height: '200',
+toolbar_Full:
+[
+    ['Save'],
+    '-',
+    ['Bold','Italic','Underline','Strike','-'],
+    ['Outdent','Indent'],
+    ['Link','Unlink'],
+    ['Smiley','Image'],
+    '-',
+    ['Undo','Redo'],
+    '-', 
+    ['RemoveFormat', 'Source'],
+    '-',
+    ['Maximize'] 
+
+
+],
+keystrokes:
+[
+    [ CKEDITOR.CTRL + 83 /*S*/, 'save' ],
+    [ CKEDITOR.CTRL + 13, 'save' ]
+],
+
+filebrowserUploadUrl : '/?upload=image',
+filebrowserImageUploadUrl : '/?upload=image',
+filebrowserWindowWidth  : 800,
+filebrowserWindowHeight : 500
+		
+}
+		
+}
+		
+);
+	
+	
+});
+</script>
+<div id="edit_[[$Comments[Comment].Id]]">
+[[$Comments[Comment].Text]]
+</div>
+[[else]]
+[[$Comments[Comment].Text]]
+[[/if]]
+									</td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td>
+                                                                                &nbsp;</td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td align='right'>
+										[[if $Comments[Comment].Editable == TRUE]]
+											Нажмите два раза по коментарию чтобы редактировать его. / <a href="/comment/[[$Comments[Comment].Id]]/delete">Удалить</a>
+										[[else]]
+											&nbsp;
+										[[/if]]
+                                                                        </td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td>
+                                                                                &nbsp;</td>
+                                                                </tr>
+                                                        </tbody>
+                                                </table>
+                                        </td>
+                                </tr>
+				<tr>
+					<td>
+					&nbsp;
+					</td>
+				</tr>
+                        </tbody>
+                </table>
+[[/section]]

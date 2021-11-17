@@ -1,0 +1,17 @@
+[[if $Action eq 'Images' or 'Albums']]
+[[if $LoggedIn eq "true" ]]
+
+
+    <table><tr><td width="10">&nbsp;</td><td>
+[[if $Action eq 'Images' and $AlbumsAmmount > 0]]
+[[$dic.add_images]] | <a href="[[$AlbumsUrl]]">[[$dic.my_albums]] [ [[$AlbumsAmmount]] ]</a>
+[[elseif $Action eq 'Images' and $AlbumsAmmount eq 0]]
+[[$dic.add_images]] | [[$dic.my_albums]]
+[[else]]
+<a href="[[$PhotosUrl]]">[[$dic.add_images]]</a> | [[$dic.my_albums]] [ [[$AlbumsAmmount]] ]
+[[/if]]
+
+    </td></tr></table>
+    <br><br>
+[[/if]]
+[[/if]]

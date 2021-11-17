@@ -1,0 +1,88 @@
+<!-- <script src="http://[[$Domain]]/js/editor/ckeditor.js" charset="utf-8" language="javascript" type="text/javascript"></script> -->
+
+<form method="POST" name="Blog" id="Blog">
+Заголовок: <input type='text' id='Title' name='Title' value='[[$Title]]'>
+<br>
+<br>
+<textarea cols="50" id="Text" name="Text" rows="10">
+[[$Text]]
+</textarea>
+<script type="text/javascript">
+//<![CDATA[
+CKEDITOR.replace( 'Text', 
+{
+//language: '[[$LANG]]',
+language: 'ru_RU',
+tabSpaces: '2',
+uiColor: '[[$CustomDesign.ckeditor_color]]',
+fullPage: 'False',
+width: '95%',
+height: '450',
+toolbar_Full:
+[
+    ['Bold','Italic','Underline','Strike','-'],
+    ['Outdent','Indent'],
+    ['Font','FontSize'],
+    ['TextColor','BGColor'],
+    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+    ['Link','Unlink'],
+    '-', 
+    ['Smiley','Image','Table'],
+    '-',
+    ['Undo','Redo'],
+    '-', 
+    ['RemoveFormat', 'Source'],
+    '-',
+    ['Maximize']
+],
+
+keystrokes:
+[
+    [ CKEDITOR.CTRL + 83 /*S*/, 'save' ],
+    [ CKEDITOR.CTRL + 13, 'save' ]
+],
+
+
+filebrowserUploadUrl : '/?upload=image',
+filebrowserImageUploadUrl : '/?upload=image',
+filebrowserWindowWidth  : '900',
+filebrowserWindowHeight : '900',
+filebrowserImageWindowWidth : '900',
+filebrowserImageWindowHeight : '900'
+});
+//]]>
+</script>
+<br>
+Запись видна: <select name="GroupId">
+[[section name=select loop=$Groups]]
+[[if isset($PostGroupId)]]
+
+
+        [[if $Groups[select].id == $PostGroupId]]
+                <option selected="selected" value="[[$Groups[select].id]]">[[$Groups[select].value]]</option>
+        [[else]]
+                <option value="[[$Groups[select].id]]">[[$Groups[select].value]]</option>
+        [[/if]]
+
+[[else]]
+	[[if $Groups[select].value == 'Everyone']]
+		<option selected="selected" value="[[$Groups[select].id]]">[[$Groups[select].value]]</option>
+	[[else]]
+		<option value="[[$Groups[select].id]]">[[$Groups[select].value]]</option>
+	[[/if]]
+[[/if]]
+[[/section]]
+</select> 
+ | Разместить на общей странице:
+[[if isset($ShowOnFirst)]]
+	[[if $ShowOnFirst=='1']]
+		<input checked="checked" name="ShowOnFirst" type="checkbox" value='1' />
+	[[else]]
+		<input name="ShowOnFirst" type="checkbox" value='1' />
+	[[/if]]
+[[else]]
+<input checked="checked" name="ShowOnFirst" type="checkbox" value='1'/>
+[[/if]]
+ | <input type='submit' value='Опубликовать'>
+</form>
+

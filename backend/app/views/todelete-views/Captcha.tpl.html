@@ -1,0 +1,28 @@
+[[if $_SESSION.Human != TRUE]]
+<center>
+<br><br>
+<form action="" method="POST">
+  <table>
+    <tr>
+      <td align="right"><a href="">[[$dic.click_to_reload]]:</a></td>
+      <td>
+	<div> <a href="">[[$Captcha]]<img src="/captcha.png" border="0" alt="[[$dic.please_enable_images]]"></a></div>
+      </td>
+    </tr>
+    <tr>
+      <td>[[$dic.please_enter_captcha]]</td>
+      <td><input style='width: 238px; height: 24px;  margin: 0px; border-width: 1px; border-color: black; padding: 0px' type='text' name='captcha' value=''/></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="submit" value="[[$dic.verify]]"/></td>
+    </tr>
+  </table>
+</form>
+</center>
+[[/if]]
+<br>

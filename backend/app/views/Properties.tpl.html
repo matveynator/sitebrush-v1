@@ -1,0 +1,13 @@
+[[if $PrePageUri eq '/']]
+<h3><a href="[[$PrePageUri]]">Заглавная страница</a> сайта:</h3>
+[[else]]
+<h3>Страница <a href="[[$PrePageUri]]">[[$PrePageUri]]</a></h3>
+[[/if]]
+<br>
+<form class="well form-inline input-prepend" method="POST" name="WikiRename" id="WikiRename">
+<input name="RenameId" type="hidden" value="[[$RenameId]]">
+<p><span class="add-on">Название: </span><input type="text" name="Title" class="input-small span6" placeholder="название страницы..." value="[[$PageTitle]]"></p>
+<p><span class="add-on">Ключевые слова: </span><input type="text" name="Tags" class="input-small span6" placeholder="ключевые слова..." value="[[$Tags]]"></p>
+<p><span class="add-on">Перенести страницу: [[$PrePrePageUri]][[if $PrePrePageUri!="/"]]/[[/if]] </span><input type="text" name="uri" class="input-small span3" placeholder="новый адрес..."></p>
+<input type="submit" class="btn btn-primary " value="сохранить"/>
+</form>

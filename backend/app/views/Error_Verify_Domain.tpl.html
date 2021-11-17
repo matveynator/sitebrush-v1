@@ -1,0 +1,40 @@
+<form class="well form-inline" method="POST">
+  <input name="register" type="hidden" value="register" >
+  <p><input type="text" name="email" class="input-small span4" placeholder="e-mail..."></p>
+[[if $Human != 'yes']]
+      <p><input type="text" class="input-small span3" name="captcha" placeholder="введите цифры -->"/>
+      <img src="/?captcha" alt="[[$dic.Plase_enter_num_d]]" border="0" name="captcha" title="введите цифры -->"></p>
+[[/if]]
+  <p><input type="password" name="password[1]" class="input-small span4" placeholder="пароль..."></p>
+  <p><input type="password" name="password[1]" class="input-small span4" placeholder="повтор пароля..."></p>
+  <input type="submit" class="btn btn-primary " value="создать администратора"/>
+</form>
+
+<body>
+<center>
+        <br />
+        <br />
+        <br />
+        <br />
+        <form method="POST">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <td valign="top" width="500">
+                                                <h1>[[$Domain]]</h1>
+                                                <h3>[[$dic.Error_Verify_Domain_full_d]]</h3>
+						<br />
+						<h2>[[$cname_entry_to_add]]
+                                                <br />
+						[[$email_entry_to_add]]</h2>
+                                                <br />
+                                                <br />
+						<form><input type="submit" value="[[$dic.Ready_Reload_e]]"></form>
+                                </tr>
+                        </tbody>
+                </table>
+        </form>
+
+</center>
+</body>
+

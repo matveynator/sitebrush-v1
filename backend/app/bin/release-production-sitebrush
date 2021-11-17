@@ -1,0 +1,14 @@
+#!/bin/bash
+svn export https://brain.zabiyaka.net/svn/software/droid1/backend/applications/default/dev /opt/sitebrush.com/backend/applications/default/new
+chmod 777 /opt/sitebrush.com/backend/applications/default/new/var
+mv /opt/sitebrush.com/backend/applications/default/production /opt/sitebrush.com/backend/applications/default/old
+mv /opt/sitebrush.com/backend/applications/default/new /opt/sitebrush.com/backend/applications/default/production
+
+svn export https://brain.zabiyaka.net/svn/software/droid1/public_html/d /opt/sitebrush.com/public_html/new
+mv /opt/sitebrush.com/public_html/p /opt/sitebrush.com/public_html/old
+mv /opt/sitebrush.com/public_html/new /opt/sitebrush.com/public_html/p
+echo "Released new version to production - OK."
+echo "Delete old version of production? (Press any key to remove old version or CTRL+C to abort.)"
+read
+rm -rf /opt/sitebrush.com/backend/applications/default/old
+rm -rf /opt/sitebrush.com/public_html/old

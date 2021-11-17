@@ -1,0 +1,10 @@
+#!/bin/bash
+for site in `ls /opt/sitebrush.com/cleanhtml/`; 
+do 
+rsync -a /opt/sitebrush.com/cleanhtml/$site /opt/sitebrush.com/tmp/backup/; 
+rsync -a /opt/sitebrush.com/storage/$site/* /opt/sitebrush.com/tmp/backup/$site/f/;
+cd /opt/sitebrush.com/tmp/backup
+nice tar cfz /opt/sitebrush.com/backup/$site.tgz $site/
+rm -rf /opt/sitebrush.com/tmp/backup/$site
+echo "finished $site backup";
+done

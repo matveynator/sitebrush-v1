@@ -1,0 +1,22 @@
+[[section name=group loop=$MyGroups]]
+   		Group #[[$smarty.section.group.index]]: [[$MyGroups[group].Name]]; 
+		[[if $MyGroups[group].UsersAmmount > 0]]
+			Users: 
+			[[section name=users loop=$MyGroups[group].Users]]
+				[[$MyGroups[group].Users[users].NickName]]
+			    	[[if not $smarty.section.users.last]]
+                	    	,
+				[[else]]
+				;
+        			[[/if]]
+			[[/section]]
+	
+		Users Ammount: [[$MyGroups[group].UsersAmmount]]; 
+		[[else]]
+		Users Ammount: [[$MyGroups[group].UsersAmmount]]; 
+		[[/if]]
+		Posts Ammount: [[$MyGroups[group].PostsAmmount]];
+  	[[if not $smarty.section.group.last]]
+   		<br><br>
+  	[[/if]]
+[[/section]] 

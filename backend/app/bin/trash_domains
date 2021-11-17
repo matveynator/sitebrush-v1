@@ -1,0 +1,101 @@
+#!/usr/bin/php
+<?php
+ini_set("max_execution_time", "0");
+ini_set("memory_limit", "2400M");
+$_SERVER['REQUEST_URI'] = '/';
+/* 
+   All paths are relative to httpd DocumentRoot folder 
+ */
+$configuration['ip']                           = '176.9.141.127';
+$configuration['backend']['path'] = "/opt/sitebrush.com/backend/dev";
+$configuration['backend']['libraries']   = "{$configuration['backend']['path']}/libraries";
+$configuration['backend']['models']      = "{$configuration['backend']['path']}/models";
+
+/*
+Propel:
+ */
+require_once("{$configuration['backend']['libraries']}/classes/manual/propel/runtime/lib/Propel.php");
+Propel::init("{$configuration['backend']['models']}/default/build/conf/default-conf.php");
+set_include_path("{$configuration['backend']['models']}/default/build/classes" . PATH_SEPARATOR . get_include_path());
+
+$Domains = DomainQuery::create()->find();
+foreach ($Domains as $Domain) {
+	$q="dig +short +trace a ".$Domain->getName()." |grep 'A ' |awk '{print$2}' ";
+	exec($q, $TracedARecord, $TracedAReturnCode);
+	if($TracedAReturnCode==0) {
+		if ((isset($TracedARecord['0'])) and ($TracedARecord['0'] == $configuration['ip'])) {
+			echo "ACTIVE:". $Domain->getName() ."\n";
+			$ActiveDomains[]=$Domain->getName();
+		} else {
+			echo "TRASHING:". $Domain->getName() ."\n";
+			$Domain->setStatus('Trashed');
+			$Domain->Save();
+			$Posts=PostQuery::create()->filterByDomain($Domain->getName())->find();
+			if($Posts) {
+				foreach ($Posts as $Post) {
+					$Post->setStatus('Trashed');
+					$Post->Save();
+				}
+			}
+			unset($Posts);
+
+			$Users=UserQuery::create()->filterByDomain($Domain->getName())->find();
+			if($Users) {
+				foreach ($Users as $User) {
+					$User->setStatus('Trashed');
+					$User->Save();
+				}
+			}
+			unset($Users);
+
+			$Uris=UriQuery::create()->filterByDomain($Domain->getName())->find();
+			if($Uris) {
+				foreach ($Uris as $Uri) {
+					$Uri->setStatus('Trashed');
+					$Uri->Save();
+				}
+			}
+			unset($Uris);
+
+			$Medias=MediaQuery::create()->filterByDomain($Domain->getName())->find();
+			if($Medias) {
+				foreach ($Medias as $Media) {
+					$Media->setStatus('Trashed');
+					$Media->Save();
+				}
+			}
+			unset($Medias);
+
+			$Groups=GroupQuery::create()->filterByDomain($Domain->getName())->find();
+			if($Groups) {
+				foreach ($Groups as $Group) {
+					$Group->setStatus('Trashed');
+					$Group->Save();
+				}
+			}
+			unset($Groups);
+
+			$Templates=TemplateQuery::create()->filterByDomain($Domain->getName())->find();
+			if($Templates) {
+				foreach ($Templates as $Template) {
+					$Template->setStatus('Trashed');
+					$Template->Save();
+				}
+			}
+			unset($Templates);
+
+			$Messages=MessageQuery::create()->filterByDomain($Domain->getName())->find();
+			if($Messages) {
+				foreach ($Messages as $Message) {
+					$Message->setStatus('Trashed');
+					$Message->Save();
+				}
+			}
+			unset($Messages);
+		}
+	}
+
+	unset($TracedARecord);
+	unset($TracedAReturnCode);
+}
+?>

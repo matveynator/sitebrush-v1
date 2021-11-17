@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="brain" defaultIdMethod="native">
+
+<!--
+        #########################################################
+        ##Content level: user, group, post, message, media ######
+-->
+  <table name="user" phpName="User">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" phpName="Id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="sessionid" phpName="SessionId" type="VARCHAR" size="255" required="true"/>
+    <column name="oldid" phpName="OldId" type="INTEGER" size="11" required="true"/>
+    <column name="avatarid" phpName="AvatarId" type="INTEGER" size="11" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="255" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="255" required="true"/>
+    <column name="nickname" phpName="NickName" type="VARCHAR" size="255" required="true"/>
+    <column name="firstname" phpName="FirstName" type="VARCHAR" size="255" required="true"/>
+    <column name="lastname" phpName="LastName" type="VARCHAR" size="255" required="true"/>
+    <column name="gender" phpName="Gender" type="VARCHAR" size="255" required="true"/>
+    <column name="phone" phpName="Phone" type="VARCHAR" size="255" required="true"/>
+    <column name="dateofregistration" phpName="DateOfRegistration" type="INTEGER" size="11" required="true"/>
+    <column name="dateofbirth" phpName="DateOfBirth" type="INTEGER" size="11" required="true"/>
+    <column name="lastvisittime" phpName="LastVisitTime" type="INTEGER" size="11" required="true"/>
+    <column name="grinvichtimeoffset" phpName="GrinvichTimeOffset" type="INTEGER" size="11" required="true"/>
+    <column name="activated" phpName="Activated" type="VARCHAR" size="255" required="true"/>
+    <column name="verificationcode" phpName="VerificationCode" type="VARCHAR" size="255" required="true"/>
+    <column name="domain" phpName="Domain" type="VARCHAR" size="255" required="true"/>
+    <column name="status" phpName="Status" type="VARCHAR" size="255" required="true"/>
+    <column name="language" phpName="Language" type="VARCHAR" size="255" required="true"/>
+    <column name="currentip" phpName="CurrentIp" type="VARCHAR" size="255" required="true"/>
+    <column name="autograb" phpName="AutoGrab" type="VARCHAR" size="255" required="true"/>
+    <column name="domaintograb" phpName="DomainToGrab" type="VARCHAR" size="255" required="true"/>
+    <column name="profile" phpName="Profile" type="CLOB" required="true"/>
+    <column name="preferences" phpName="Preferences" type="CLOB" required="true"/>
+    <column name="securitylog" phpName="SecurityLog" type="CLOB" required="true"/>
+    <column name="invitedby" phpName="InvitedBy" type="VARCHAR" size="255" required="true"/>
+    <column name="invitesammount" phpName="InvitesAmmount" type="INTEGER" size="11" required="true"/>
+    <column name="quotabytes" phpName="QuotaBytes" type="VARCHAR" size="255" required="false"/>
+    <column name="quotaoriginals" phpName="QuotaOriginals" type="VARCHAR" size="255" required="false"/>
+    <column name="quotabytesused" phpName="QuotaBytesUsed" type="BIGINT" size="20" required="false"/>
+    <column name="quotaoriginalsused" phpName="QuotaOriginalsUsed" type="BIGINT" size="20" required="false"/>
+  </table>
+  <table name="group" phpName="Group">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="owner_id" phpName="OwnerId" type="integer"  required="true"/>
+    <column name="name" type="varchar" size="255" required="true" />
+    <column name="title" type="clob" required="true" />
+    <column name="comment" type="clob" required="true" />
+    <column name="date" type="INTEGER" size="11" required="true"/>
+    <column name="status" type="varchar" size="255"/>
+    <column name="domain" type="varchar" size="255"/>
+  </table>
+  <table name="invite" phpName="Invite">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="hash" type="varchar" size="255" required="true" />
+    <column name="status" type="varchar" size="255"/>
+    <column name="domain" type="varchar" size="255"/>
+  </table>
+  <table name="post" phpName="Post">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="ownerid" phpName="OwnerId" type="INTEGER" size="11" required="true"/>
+    <column name="deleterid" phpName="DeleterId" type="INTEGER" size="11" required="true"/>
+    <column name="requesturi" phpName="RequestUri" type="LONGVARCHAR" required="false"/>
+    <column name="type" type="VARCHAR" size="255" required="true"/>
+    <column name="date" type="INTEGER" size="11" required="true"/>
+    <column name="title" type="LONGVARCHAR" required="true"/>
+    <column name="text" type="CLOB" required="true"/>
+    <column name="shorttext" phpName="ShortText" type="CLOB" required="true"/>
+    <column name="tags" type="LONGVARCHAR" required="true"/>
+    <column name="version" type="INTEGER" size="11" required="true"/>
+    <column name="domain" type="LONGVARCHAR" required="true"/>
+    <column name="published" type="VARCHAR" size="255" required="true"/>
+    <column name="status" type="VARCHAR" size="255" required="true"/>
+  </table>
+  <table name="message" phpName="Message">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="to" type="integer" />
+    <column name="from" type="integer" />
+    <column name="nickname" phpName="NickName"  type="LONGVARCHAR" />
+    <column name="order" type="clob"  />
+    <column name="date" type="integer" required="true"/>
+    <column name="subject" type="clob" />
+    <column name="text" type="clob" required="true" />
+    <column name="type" type="varchar" size="255" required="true" />
+    <column name="unread" type="boolean" />
+    <column name="status" type="varchar" size="255" required="true" />
+    <column name="domain" type="varchar" size="255" required="true" />
+  </table>
+  <table name="media" phpName="Media">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="type" type="varchar" size="255" required="true" />
+    <column name="hash" type="varchar" size="255" required="true" />
+    <column name="originalhash" type="varchar" size="255" required="true" phpName="OriginalHash"/>
+    <column name="format" type="varchar" size="255" required="true" />
+    <column name="width" type="varchar" size="255" required="true" />
+    <column name="height" type="varchar" size="255" required="true" />
+    <column name="status" type="varchar" size="255" required="true" />
+    <column name="domain" type="varchar" size="255" required="true" />
+    <column name="day" type="integer" required="true"/>
+    <column name="date" type="integer" required="true"/>
+    <column name="sizesarray" phpName="SizesArray" type="clob" required="true" />
+    <column name="rating" type="float" required="true"/>
+    <column name="ratingcount" type="integer" required="true" phpName="RatingCount"/>
+    <column name="ratingip" type="clob" required="true" phpName="RatingIp"/>
+    <column name="views" type="integer" required="true"/>
+    <column name="bytesused" type="integer" required="true" phpName="BytesUsed"/>
+  </table>
+
+  <table name="template" phpName="Template">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="name" type="longvarchar" required="true" />
+    <column name="data" type="clob" required="true"/>
+    <column name="status" type="varchar" size="255" required="true" />
+    <column name="domain" type="varchar" size="255" required="true" />
+  </table>
+<!--
+        #################################################
+        ##Domain level: domain, language, uri ##
+-->
+  <table name="domain" phpName="Domain">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="name" phpName="Name" type="LONGVARCHAR" required="true" />
+    <column name="dnszonedata" phpName="DNSZoneData" type="LONGVARCHAR" required="true"/> 
+    <column name="cnamesecret" phpName="CnameSecret" type="varchar" size="255" required="true" />
+    <column name="emailsecret" phpName="EmailSecret" type="varchar" size="255" required="true" />
+    <column name="freezed" type="integer" required="true"/>
+    <column name="status" type="varchar" size="255" required="true" />
+
+  </table>
+  <table name="language" phpName="Language">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="code" type="varchar" size="255" required="true" />
+    <column name="revision" type="integer" required="true"/>
+    <column name="dictionary" type="clob" required="true" />
+    <column name="status" type="varchar" size="255" required="true" />
+    <column name="domain" type="varchar" size="255" required="true" />
+  </table>
+  <table name="uri" phpName="Uri">
+    <vendor type="mysql">
+     <parameter name="Charset" value="utf8"/>
+    </vendor>
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="olduri" phpName="OldUri" type="varchar" size="255" required="true" />
+    <column name="newuri" phpName="NewUri" type="varchar" size="255" required="true" />
+    <column name="date" type="integer" required="true"/>
+    <column name="status" type="varchar" size="255"/>
+    <column name="domain" type="varchar" size="255"/>
+  </table>
+
+
+<!--
+        #########################################################
+        ## Content level relations: #############################
+	#################user, group, post, message, media ######
+
+		user:
+			user_group
+			user_invite
+			user_post
+			user_message
+			user_media
+		group:
+			group_post
+			group_message
+			group_media
+
+		post:
+			post_message
+			post_media
+			post_template
+
+		message:
+			message_media
+		domain:
+			domain_group
+
+-->
+
+ <table name="user_group" isCrossRef="true">
+   <column name="user_id" type="INTEGER" primaryKey="true"/>
+   <column name="group_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="user">
+     <reference local="user_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="group">
+     <reference local="group_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="user_invite" isCrossRef="true">
+   <column name="user_id" type="INTEGER" primaryKey="true"/>
+   <column name="invite_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="user">
+     <reference local="user_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="invite">
+     <reference local="invite_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="user_post" isCrossRef="true">
+   <column name="user_id" type="INTEGER" primaryKey="true"/>
+   <column name="post_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="user">
+     <reference local="user_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="post">
+     <reference local="post_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="user_message" isCrossRef="true">
+   <column name="user_id" type="INTEGER" primaryKey="true"/>
+   <column name="message_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="user">
+     <reference local="user_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="message">
+     <reference local="message_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="user_media" isCrossRef="true">
+   <column name="user_id" type="INTEGER" primaryKey="true"/>
+   <column name="media_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="user">
+     <reference local="user_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="media">
+     <reference local="media_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="group_post" isCrossRef="true">
+   <column name="group_id" type="INTEGER" primaryKey="true"/>
+   <column name="post_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="group">
+     <reference local="group_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="post">
+     <reference local="post_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="group_message" isCrossRef="true">
+   <column name="group_id" type="INTEGER" primaryKey="true"/>
+   <column name="message_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="group">
+     <reference local="group_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="message">
+     <reference local="message_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="group_media" isCrossRef="true">
+   <column name="group_id" type="INTEGER" primaryKey="true"/>
+   <column name="media_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="group">
+     <reference local="group_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="media">
+     <reference local="media_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="post_message" isCrossRef="true">
+   <column name="post_id" type="INTEGER" primaryKey="true"/>
+   <column name="message_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="post">
+     <reference local="post_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="message">
+     <reference local="message_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="post_media" isCrossRef="true">
+   <column name="post_id" type="INTEGER" primaryKey="true"/>
+   <column name="media_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="post">
+     <reference local="post_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="media">
+     <reference local="media_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="post_template" isCrossRef="true">
+   <column name="post_id" type="INTEGER" primaryKey="true"/>
+   <column name="template_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="post">
+     <reference local="post_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="template">
+     <reference local="template_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+ <table name="message_media" isCrossRef="true">
+   <column name="message_id" type="INTEGER" primaryKey="true"/>
+   <column name="media_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="message">
+     <reference local="message_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="media">
+     <reference local="media_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+<!--
+        #########################################################
+        ##Domain level relations: domain, language ####
+
+		domain:
+			domain_language
+			
+
+	#########################################################		
+-->
+
+ <table name="domain_language" isCrossRef="true">
+   <column name="domain_id" type="INTEGER" primaryKey="true"/>
+   <column name="language_id" type="INTEGER" primaryKey="true"/>
+   <foreign-key foreignTable="domain">
+     <reference local="domain_id" foreign="id"/>
+   </foreign-key>
+   <foreign-key foreignTable="language">
+     <reference local="language_id" foreign="id"/>
+   </foreign-key>
+ </table>
+
+</database>

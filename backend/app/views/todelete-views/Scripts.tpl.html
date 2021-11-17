@@ -1,0 +1,56 @@
+[[if $Action eq Images and $Action eq Blog and $Action eq Album]]
+<script src="http://[[$Domain]]/js/saveFormValues.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<script src="http://[[$Domain]]/js/cookie.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+[[/if]]
+<script src="http://[[$Domain]]/js/jquery.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<script src="http://[[$Domain]]/js/lightbox/js/jquery.lightbox.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<script charset="utf-8" language="javascript" type="text/javascript">
+$(function(){
+                        $.Lightbox.construct({
+                                show_linkback:  false,
+				show_info: true,
+				show_extended_info: true,
+                                text: {
+                                        image:          '[[$dic.shoot]]',
+                                        of:             '[[$dic.of]]',     
+                                        close:          '[[$dic.close_x]]',
+                                        closeInfo:      '[[$dic.you_can_also_close]]',
+                                        download:       '[[$dic.direct_link_to_download]]',
+                                        help: {
+                                                close:     '[[$dic.click_to_close]]',
+                                                interact:  '[[$dic.hover_to_interact]]' 
+                                              }
+                                },
+                                files: {
+                                        images: {
+                                                        prev:   'images/prev.gif',
+                                                        next:   'images/next.gif' 
+                                                }
+                                }
+                        });
+                });
+</script>
+
+[[if $Action eq Join ]]
+<script src="http://[[$Domain]]/f/js/saveFormValues.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<script src="http://[[$Domain]]/f/js/cookie.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+[[/if]]
+
+
+[[if $Action eq Albums]]
+<script src="http://[[$Domain]]/js/jquery.jeditable.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+[[/if]]
+
+<script type="text/javascript"> 
+ 
+function openWin(page, wname, width, height) {
+	Win=open('', wname,'toolbar=no,scrollbars=yes,status=yes,resizable=yes,height='+height+',width='+width);
+	if (!(Win.sms)) {
+		if(!width) width=420;
+		if(!height) height=400;
+		Win=open(page, wname, 'toolbar=no,scrollbars=yes,status=yes,height='+height+',width='+width);
+Win.focus();
+    }
+}
+</script>
+<script src="http://[[$Domain]]/js/editor/ckeditor_source.js" charset="utf-8" language="javascript" type="text/javascript"></script>

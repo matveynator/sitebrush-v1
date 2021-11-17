@@ -1,0 +1,37 @@
+#!/usr/bin/php 
+<?php
+//usage: update-from-template domain.com "SiteBrush-Template Name" "/request/uri"
+
+require_once("../../../public_html/config.php");
+require_once("{$configuration['path']['backend']}/init.php");
+if ((isset($argv['1']))and($argv['1']!="")) {
+	$configuration['domain']=$argv['1'];
+	if ((isset($argv['2']))and($argv['2']!="")) {
+		$TemplateName           =       $argv['2'];
+		if ((isset($argv['3']))and($argv['3']!="")) {
+			$Uri                    =       $argv['3'];
+			$Template     		= 	TemplateQuery::create()->FilterByName($TemplateName)->filterByDomain($configuration['domain'])->filterByStatus("Active")->findOne();
+			if($Template) {
+				$TemplateData		=	$Template->getData();
+				$LastActiveLinkedPost 	= 	PostQuery::create()->filterByType('Wiki')->filterByRequestUri($Uri)->filterByDomain($configuration['domain'])->filterByStatus('Active')->orderByVersion('desc')->findOne();
+				if($LastActiveLinkedPost) {
+					require_once("{$configuration['backend']['path']}/libraries/classes/auto/simple_html_dom.php");
+					$LastActiveLinkedPostHtml = new simple_html_dom();
+					$LastActiveLinkedPostHtml->load($LastActiveLinkedPost->getText());
+					foreach ($LastActiveLinkedPostHtml->find("[class={$TemplateName}]") as $LinkedPostTemplateElement) {
+						if ((md5($LinkedPostTemplateElement->outertext)) != (md5($TemplateData))) {
+							$LinkedPostTemplateElement->outertext = $TemplateData;
+						}
+					}
+
+					if ((md5($LastActiveLinkedPostHtml->save())) != (md5($LastActiveLinkedPost->getText()))) {
+						$LastActiveLinkedPost->setText($LastActiveLinkedPostHtml->save());
+						$LastActiveLinkedPost->setVersion($LastActiveLinkedPost->getVersion() + 1);
+						$LastActiveLinkedPost->Save();
+					}
+				}
+			}
+		}
+	}
+}
+?>

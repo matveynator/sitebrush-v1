@@ -1,0 +1,33 @@
+<form class="well form-inline" method="POST" name="change_email" id="change_email">
+<input name="change_email" type="hidden" value="true" >
+<p>[[$dic.You_can_change_your_email_dd]]</p>
+<p><input type="text" name="email" class="input-small span4" placeholder="Новый email..."></p>
+<p><input type="password" name="password-old" class="input-small span4" placeholder="Пароль..."></p>
+<input type="submit" class="btn btn-primary " value="сменить email"/>
+</form>
+
+<form class="well form-inline" method="POST" name="change_password" id="change_password">
+<input name="change_password" type="hidden" value="true" >
+<p>[[$dic.You_can_change_your_password_dd]]</p>
+<p><input type="password" name="password[old]" class="input-small span4" placeholder="Старый пароль..."></p>
+<p><input type="password" name="password[1]" class="input-small span4" placeholder="Новый пароль..."></p>
+<p><input type="password" name="password[2]" class="input-small span4" placeholder="Повторите пароль..."></p>
+<input type="submit" class="btn btn-primary " value="сменить пароль"/>
+</form>
+
+
+<form class="well form-inline" method="POST" action="/?recover">
+<p>[[$dic.Forgot_your_password_q]]</p>
+<input type='hidden' class="input-small span4" name='email' value='[[$_SESSION.Email]]'></p>
+[[if $Human != 'yes']]
+<p><img src="/?captcha" alt="[[$dic.Plase_enter_num_d]]" border="0" name="captcha" title="[[$dic.Plase_enter_num_d]]"></p>
+<p><input type="text" class="input-small span4" name="captcha" placeholder="[[$dic.Plase_enter_num_d]]"/></p>
+[[/if]]
+
+<input type="submit" class="btn btn-primary" value="выслать пароль на [[$_SESSION.Email]]"/>
+</form>
+
+<div class="well form-inline">
+<p>Вы вошли как <strong>[[$_SESSION.Email]]</strong></p>
+<a href="/?logout" class="btn btn-primary">выйти</a>
+</div>

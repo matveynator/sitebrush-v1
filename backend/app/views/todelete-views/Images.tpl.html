@@ -1,0 +1,88 @@
+[[if $Action eq 'Images']]
+[[if $LoggedIn eq "true" ]]
+
+<table><tr><td width="10">&nbsp;</td><td width="770">
+
+  [[section name=DaySection loop=$ImagesInOneDay]]
+    [[if $smarty.section.DaySection.iteration eq 1]]
+
+<script type="text/javascript" charset="utf-8">
+
+$(function() {
+    
+  $(".click_[[$ImagesInOneDay[DaySection].Day]]").editable("/functions/post/album/name/[[$ImagesInOneDay[DaySection].Day]]", { 
+     indicator : "[[$dic.saving_progress]]",
+     tooltip   : "[[$dic.click_to_edit]]",
+     style  : "inherit",
+     callback : function() {
+                 window.location.reload();
+                 }
+  });
+
+[[if isset($UserAlbumsList) ]]
+ $('.select_[[$ImagesInOneDay[DaySection].Day]]').editable("/functions/post/album/bind/[[$ImagesInOneDay[DaySection].Day]]", { 
+     data   : '[[$UserAlbumsList]]',
+     type   : 'select',
+     submit : '[[$dic.ok]]',
+     style  : "inherit",
+     callback : function() {
+                 window.location.reload();
+                 }
+
+ });
+
+ $('.select_image_[[$ImagesInOneDay[DaySection].imageId]]').editable("/functions/post/image/bind/[[$ImagesInOneDay[DaySection].imageId]]", { 
+     data   : '[[$UserAlbumsList]]',
+     type   : 'select',
+     submit : '[[$dic.ok]]',
+     style  : "display: inline",
+     callback : function() {
+                 window.location.reload();
+                 }
+
+ });
+[[/if]]
+
+
+});
+
+</script>
+
+
+[[$dic.uploaded]] [[$ImagesInOneDay[DaySection].HumanDay]] | <b class="click_[[$ImagesInOneDay[DaySection].Day]]" style="display: inline">[[$dic.name_new_album]]</b> [[if isset($UserAlbumsList) ]]| <b class="select_[[$ImagesInOneDay[DaySection].Day]]">[[$dic.click_add_to_album]]</b>[[/if]]
+<br><br>
+
+
+
+    <div id="ImageBox229" align="center"><a href="[[$ImageUploadUrl]]/1024/standart/color/[[$ImagesInOneDay[DaySection].Hash]].[[$ImagesInOneDay[DaySection].Format]]"><img style="float: left; border:1px solid #ffffff;margin:0px auto; vertical-align: middle;" border="0" src="[[$ImageUploadUrl]]/229/crop/color/[[$ImagesInOneDay[DaySection].Hash]].[[$ImagesInOneDay[DaySection].Format]]"></a><div id="ImageBoxNavigation229" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0;this.filters.alpha.opacity=0"><div align="center"><a href="[[$PhotosUrl]]/rotate/[[$ImagesInOneDay[DaySection].imageId]]"><span class="ImageFont"><</span></a>  <span class="ImageFont">|</span> <span class="ImageFont"><span class="select_image_[[$ImagesInOneDay[DaySection].imageId]]">b</span></span> <span class="ImageFont">|</span> <a href="[[$PhotosUrl]]/delete/[[$ImagesInOneDay[DaySection].imageId]]"><span class="ImageFont">x</span></a></div></div></div>
+
+    [[/if]]
+
+    [[if $smarty.section.DaySection.iteration != 1]]
+<script type="text/javascript" charset="utf-8">
+
+$(function() {
+    
+ $('.select_image_[[$ImagesInOneDay[DaySection].imageId]]').editable("/functions/post/image/bind/[[$ImagesInOneDay[DaySection].imageId]]", { 
+     data   : '[[$UserAlbumsList]]',
+     type   : 'select',
+     submit : '[[$dic.ok]]',
+     style  : "display: inline",
+     callback : function() {
+                 window.location.reload();
+                 }
+
+ });
+
+});
+
+</script>
+
+<div id="ImageBox"> <a href="[[$ImageUploadUrl]]/1024/standart/color/[[$ImagesInOneDay[DaySection].Hash]].[[$ImagesInOneDay[DaySection].Format]]"><img style="float: left; border:1px solid #ffffff;margin:0px auto; vertical-align: middle;" border="0" src="[[$ImageUploadUrl]]/75/crop/color/[[$ImagesInOneDay[DaySection].Hash]].[[$ImagesInOneDay[DaySection].Format]]"></a><div id="ImageBoxNavigation" onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100" onmouseout="this.style.opacity=0;this.filters.alpha.opacity=0"><div align="center"><a href="[[$PhotosUrl]]/rotate/[[$ImagesInOneDay[DaySection].imageId]]"><span class="ImageFont"><</span></a> <span class="ImageFont">|</span> <span class="ImageFont"><span class="select_image_[[$ImagesInOneDay[DaySection].imageId]]">b</span></span> <span class="ImageFont">|</span> <a href="[[$PhotosUrl]]/delete/[[$ImagesInOneDay[DaySection].imageId]]"><span class="ImageFont">x</span></a></div></div></div>
+    [[/if]]
+  [[/section]]
+
+</td><td width="10">&nbsp;</td></tr></table>
+<br>
+[[/if]]
+[[/if]]

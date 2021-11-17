@@ -1,0 +1,297 @@
+<script type="text/javascript">
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-33729020-1']);
+_gaq.push(['_setDomainName', '.[[$Domain]]']);
+_gaq.push(['_setAllowLinker', true]);
+_gaq.push(['_trackPageview']);
+
+(function() {
+ var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+<script src="http://[[$Domain]]/[[$StaticFolder]]/js/jquery/jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+$.noConflict();
+
+(function($) {
+
+ var menu, shadow, trigger, content, hash, currentTarget;
+ var defaults = {
+menuStyle: {
+listStyle: 'none',
+padding: '1px',
+margin: '0px',
+backgroundColor: '#fff',
+border: 'none',
+width: '200px'
+},
+itemStyle: {
+margin: '0px',
+display: 'block',
+cursor: 'default',
+fontFamily : 'DefaultLight, Arial, Helvetica',
+[[if $LoggedIn==TRUE and $Freezed == TRUE]]
+backgroundColor : '#6699cc',
+color: '#ffffff',
+[[else]]
+	backgroundColor : '#ffffff',
+color: '#000000',	
+[[/if]]
+	border: 'none',
+padding: '1px',
+
+	   },
+itemHoverStyle: {
+color: '#000000',
+       [[if $LoggedIn==TRUE and $Freezed == TRUE]]
+	       backgroundColor: '#333366',
+       color: '#ffffff',
+       [[else]]
+	       backgroundColor: '#ccc',
+       color: '#000000',
+       [[/if]]
+	       border: 'none',
+		},
+
+eventPosX: 'pageX',
+	eventPosY: 'pageY',
+	shadow : true,
+	onContextMenu: null,
+	onShowMenu: null
+	};
+
+$.fn.contextMenu = function(id, options) {
+	if (!menu) {                                      // Create singleton menu
+		menu = $('<div id="jqContextMenu"></div>')
+			.hide()
+			.css({position:'absolute', zIndex:'500'})
+			.appendTo('body')
+			.bind('click', function(e) {
+					e.stopPropagation();
+					});
+	}
+	if (!shadow) {
+		shadow = $('<div></div>')
+			.css({backgroundColor:'#000',position:'absolute',opacity:0.2,zIndex:499})
+			.appendTo('body')
+			.hide();
+	}
+	hash = hash || [];
+	hash.push({
+id : id,
+menuStyle: $.extend({}, defaults.menuStyle, options.menuStyle || {}),
+itemStyle: $.extend({}, defaults.itemStyle, options.itemStyle || {}),
+itemHoverStyle: $.extend({}, defaults.itemHoverStyle, options.itemHoverStyle || {}),
+bindings: options.bindings || {},
+shadow: options.shadow || options.shadow === false ? options.shadow : defaults.shadow,
+onContextMenu: options.onContextMenu || defaults.onContextMenu,
+onShowMenu: options.onShowMenu || defaults.onShowMenu,
+eventPosX: options.eventPosX || defaults.eventPosX,
+eventPosY: options.eventPosY || defaults.eventPosY
+});
+
+var index = hash.length - 1;
+$(this).bind('contextmenu', function(e) {
+	if (!e.ctrlKey) {
+		// Check if onContextMenu() defined
+		var bShowContext = (!!hash[index].onContextMenu) ? hash[index].onContextMenu(e) : true;
+		if (bShowContext) display(index, this, e, options);
+		return false;
+	}
+}
+);
+return this;
+};
+
+function display(index, trigger, e, options) {
+	var cur = hash[index];
+	content = $('#'+cur.id).find('ul:first').clone(true);
+	content.css(cur.menuStyle).find('li').css(cur.itemStyle).hover(
+			function() {
+			$(this).css(cur.itemHoverStyle);
+			},
+			function(){
+			$(this).css(cur.itemStyle);
+			}
+			).find('img').css({verticalAlign:'middle',paddingRight:'2px'});
+
+	// Send the content to the menu
+	menu.html(content);
+
+	// if there's an onShowMenu, run it now -- must run after content has been added
+	// if you try to alter the content variable before the menu.html(), IE6 has issues
+	// updating the content
+	if (!!cur.onShowMenu) menu = cur.onShowMenu(e, menu);
+
+	$.each(cur.bindings, function(id, func) {
+			$('#'+id, menu).bind('click', function(e) {
+				hide();
+				func(trigger, currentTarget);
+				});
+			});
+
+	menu.css({'left':e[cur.eventPosX],'top':e[cur.eventPosY]}).show();
+	if (cur.shadow) shadow.css({width:menu.width(),height:menu.height(),left:e.pageX+2,top:e.pageY+2}).show();
+	$(document).one('click', hide);
+}
+
+function hide() {
+	menu.hide();
+	shadow.hide();
+}
+
+// Apply defaults
+$.contextMenu = {
+defaults : function(userDefaults) {
+		   $.each(userDefaults, function(i, val) {
+				   if (typeof val == 'object' && defaults[i]) {
+				   $.extend(defaults[i], val);
+				   }
+				   else defaults[i] = val;
+				   });
+	   }
+};
+
+})(jQuery);
+
+jQuery(function($) {
+		$('div.contextMenu').hide();
+		});
+
+</script>
+
+<style type="text/css">
+img{border:0; display: inline;}
+
+
+.SiteBrushContextMenu {
+	font-size:14px;
+	font-family: "Arial";
+	text-align: left;
+}
+
+.ContextMenuCopyright {
+	font-size:10px;
+	font-family: "Arial";
+	text-align: center;
+}
+
+.SiteBrushMenu {
+visibility: hidden;
+}
+
+[[if $LoggedIn==TRUE and $Freezed == TRUE]]
+a.SiteBrushContextMenu:link {
+	text-shadow:1px 1px #444444;
+color: #fff;
+}
+a.SiteBrushContextMenu:visited {
+	text-shadow:1px 1px #444444;
+color: #fff;
+}
+a.SiteBrushContextMenu:active {
+	text-shadow:1px 1px #444444;
+color: #fff;
+}
+a.SiteBrushContextMenu:hover {
+	text-shadow:1px 1px #444444;
+color: #fff;
+
+}
+
+[[else]]
+a.SiteBrushContextMenu:link {
+	text-shadow:1px 1px #ffffff;
+color: #000;
+}
+a.SiteBrushContextMenu:visited {
+	text-shadow:1px 1px #ffffff;
+color: #000;
+}
+a.SiteBrushContextMenu:active {
+	text-shadow:1px 1px #ffffff;
+color: #000;
+}
+a.SiteBrushContextMenu:hover {
+	text-shadow:1px 1px #ffffff;
+color: #000;
+}
+[[/if]]
+
+</style>
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+		$('#SiteBrush').contextMenu('SiteBrushMenu', {});
+		});
+</script>
+
+
+[[if $LoggedIn==TRUE]]
+<div style="visibility: hidden" class="contextMenu" id="SiteBrushMenu">
+<ul>
+[[if $_SERVER.REQUEST_URI !='/' ]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/arrow-left-up.png"  border="0"/> <a href="[[$PathUri.dirname]]" class="SiteBrushContextMenu">Наверх</a></li>
+[[/if]]
+[[if $SubUriAmmount > 1]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/tree.png" border="0"/> <a href="?subpages" class="SiteBrushContextMenu">Подстраниц: [[$SubUriAmmount]]</a></li>
+[[/if]]
+<li>&nbsp;</li>
+
+
+[[if $PageVersion > 0]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/pencil.png"  border="0"/> <a href="?edit" class="SiteBrushContextMenu">Редактировать</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/copy.png"  border="0"/> <a href="?grab" class="SiteBrushContextMenu">Копировать сайт</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/cog.png" border="0"/> <a href="?properties" class="SiteBrushContextMenu">Свойства</a></li>
+[[if $RevisionsAmmount > 0 ]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/revisions.png" border="0"/> <a href="?revisions" class="SiteBrushContextMenu">Ревизий: [[$RevisionsAmmount]]</a></li>
+[[/if]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/cross.png"  border="0"/> <a href="?delete=[[$PageId]]" class="SiteBrushContextMenu">Удалить</a></li>
+<li>&nbsp;</li>
+[[else]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/pencil.png"  border="0"/> <a href="?edit" class="SiteBrushContextMenu">Создать</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/copy.png"  border="0"/> <a href="?grab" class="SiteBrushContextMenu">Копировать сайт</a></li>
+[[if isset($DeletedRevisions)]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/arrow_undo.png" border="0"/> <a href="?revisions" class="SiteBrushContextMenu">Удалено: [[$DeletedRevisions]]</a></li>
+[[/if]]
+<li>&nbsp;</li>
+[[/if]]
+[[if $Freezed == 1]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/publish.png" border="0"/> <a href="?unfreeze" class="SiteBrushContextMenu"><font color="#ff9900">Опубликовать!</font></a></li>
+[[if $BackupExists == 1]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/backup.png" border="0"/> <a href="?backup" class="SiteBrushContextMenu">Скачать сайт</a></li>
+[[/if]]
+<li>&nbsp;</li>
+
+[[else]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/freeze.png" border="0"/> <a href="?freeze" class="SiteBrushContextMenu">Заморозить</a></li>
+[[if $BackupExists == 1]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/backup.png" border="0"/> <a href="?backup" class="SiteBrushContextMenu">Скачать сайт</a></li>
+[[/if]]
+<li>&nbsp;</li>
+[[/if]]
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/profile.png" border="0"/> <a href="?profile" class="SiteBrushContextMenu">Учетная запись</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/sign-out.png" border="0"/> <a href="?logout" class="SiteBrushContextMenu">Выйти</a></li>
+<li>&nbsp;</li>
+<li id="help" class="SiteBrushContextMenu">&nbsp;<a href="http://sitebrush.reformal.ru" class="SiteBrushContextMenu">Нашли ошибку?</a></li>
+<li>&nbsp;</li>
+<li class="ContextMenuCopyright"><a href="http://sitebrush.com" class="SiteBrushContextMenu ContextMenuCopyright">sitebrush</a></li>
+</ul>
+</div>
+[[else]]
+<div style="visibility:hidden" class="contextMenu" id="SiteBrushMenu">
+<ul>
+<li id="close" class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/lock.png" /> <a href="?login" class="SiteBrushContextMenu">Войти</a></li>
+<li>&nbsp;</li>
+<li id="help" class="SiteBrushContextMenu">&nbsp;<a href="http://sitebrush.reformal.ru" class="SiteBrushContextMenu">Нашли ошибку?</a></li>
+<li>&nbsp;</li>
+<li class="SiteBrushContextMenu ContextMenuCopyright"><a href="http://sitebrush.com" class="SiteBrushContextMenu ContextMenuCopyright">sitebrush</a></li>
+</ul>
+</div>
+
+[[/if]]

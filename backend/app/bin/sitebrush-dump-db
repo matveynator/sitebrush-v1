@@ -1,0 +1,3 @@
+#!/bin/bash
+/usr/bin/mysqldump -h 127.0.0.1 -pOUfXprRJ0Ubsuyf -u sitebrush sitebrush | gzip > /backup/sql/`date +%Y-%m-%d_%H-%M`.sql.gz
+find /backup/sql/* -type f -ctime +15 | xargs rm -f

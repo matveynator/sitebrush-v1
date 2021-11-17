@@ -1,0 +1,17 @@
+<div class="alert alert-success">
+Настрока DNS прошла успешно.
+</div>
+
+
+<form class="well form-inline" method="POST">
+  <input name="register" type="hidden" value="register" >
+  <p><input type="email" name="email" class="input-small span4" placeholder="e-mail..."></p>
+[[if $Human != 'yes']]
+      <p><input type="text" class="input-small span3" name="captcha" placeholder="введите цифры -->"/>
+      <img src="/?captcha" alt="[[$dic.Plase_enter_num_d]]" border="0" name="captcha" title="введите цифры -->"></p>
+[[/if]]
+  <p><input type="password" name="password[1]" class="input-small span4" placeholder="пароль..."></p>
+  <p><input type="password" name="password[2]" class="input-small span4" placeholder="повтор пароля..."></p>
+  <input type="submit" class="btn btn-success" value="создать администратора"/>
+</form>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+ <title>[[$PageTitle]]</title>
+ <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+
+<script src="/js/editor/ckeditor.js" charset="utf-8" language="javascript" type="text/javascript"></script>
+<script charset="utf-8" language="javascript" type="text/javascript">
+
+CKEDITOR.on('instanceReady',
+      function( evt )
+      {
+         var editor = evt.editor;
+         editor.execCommand('maximize');
+        [[if $Action eq TemplateEditor]]
+        editor.execCommand('source');
+        [[/if]]
+
+      });
+</script>
+<script charset="utf-8" language="javascript" type="text/javascript">
+
+  CKEDITOR.editorConfig = function( config )
+  {
+        config.language = '[[$LANG]]';
+        config.tabSpaces = 2;
+        config.fullPage = false;
+        config.uiColor = '#cccccc';
+        [[if $Action eq TemplateEditor]]
+        config.colorButton_enableMore = true;
+        config.htmlEncodeOutput = false;
+        config.protectedSource.push( /[+\$[\s\S]*?]+/g );
+        [[/if]]
+      config.toolbar_Full =
+[
+    ['Source','-','Save','NewPage','Preview','-','Templates'],
+    ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print', 'SpellChecker', 'Scayt'],
+    ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+    ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],
+    '/',
+    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+    ['Link','Unlink','Anchor'],
+    ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+    '/',
+    ['Styles','Format','Font','FontSize'],
+    ['TextColor','BGColor'],
+    ['Maximize', 'ShowBlocks']
+];
+  };
+</script>
+
+</head>

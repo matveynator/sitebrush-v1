@@ -1,0 +1,23 @@
+[[if $PrePageUri eq '/']]
+<h3><a href="[[$PrePageUri]]">Заглавная страница</a> сайта:</h3>
+[[else]]
+<h3>Страница <a href="[[$PrePageUri]]">[[$PrePageUri]]</a></h3>
+[[/if]]
+<br>
+<table class="table table-striped">
+<thead><tr><td width="30">#</td><td width="200">Дата</td><td>Название</td><td>Действие</td> <td>Автор</td><td>Кто удалил?</td></tr></thead>
+<tbody>
+[[section name=Page loop=$Revisions]]
+[[if $Revisions[Page].Status neq 'Deleted']]
+[[if $Revisions[Page].Version eq $CurrentVersion]]
+<tr><td width="30">[[$Revisions[Page].Version]]</td><td width="200"><font color="#999999">[[$Revisions[Page].Date|date_format:"%H:%M - %d %B %Y"]]</font></td><td>--> <strong>[[$Revisions[Page].Title]]</strong></td><td><a href='?delete=[[$Revisions[Page].Id]]' class="btn btn-danger">удалить</a></td> <td>[[$Revisions[Page].Authors]]</td><td>&nbsp;</td></tr>
+[[else]]
+<tr><td width="30">[[$Revisions[Page].Version]]</td><td width="200"><font color="#999999">[[$Revisions[Page].Date|date_format:"%H:%M - %d %B %Y"]]</font></td><td>[[$Revisions[Page].Title]]</td><td><a href='?delete=[[$Revisions[Page].Id]]' class="btn btn-danger">удалить</a></td><td>[[$Revisions[Page].Authors]]</td><td>&nbsp;</td></tr>
+[[/if]]
+[[else]]
+<tr><td width="30"><s>[[$Revisions[Page].Version]]</s></td><td width="200"><s><font color="#999999">[[$Revisions[Page].Date|date_format:"%H:%M - %d %B %Y"]]</font></s></td><td><s>[[$Revisions[Page].Title]]</s></strong></td><td><a href='?undelete=[[$Revisions[Page].Id]]' class="btn btn-success">восстановить</a></td><td><s>[[$Revisions[Page].Authors]]</s></td><td>[[$Revisions[Page].Terminator]]</td></tr>
+[[/if]]
+[[/section]]
+</tbody>
+</table>
+

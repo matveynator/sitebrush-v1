@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <!-- Uncomment this if you have PEAR Log installed
+  <log>
+    <type>file</type>
+    <name>/path/to/propel.log</name>
+    <ident>propel-bookstore</ident>
+    <level>7</level>
+  </log>
+  -->
+  <propel>
+    <datasources default="brain">
+      <datasource id="brain">
+        <adapter>mysql</adapter> <!-- sqlite, mysql, myssql, oracle, or pgsql -->
+        <connection>
+          <dsn>mysql:host=127.0.0.1;dbname=sitebrush</dsn>
+          <user>sitebrush</user>
+          <password>OUfXprRJ0Ubsuyf</password>
+        </connection>
+      </datasource>
+    </datasources>
+  </propel>
+</config>
