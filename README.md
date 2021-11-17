@@ -1,6 +1,6 @@
 # SiteBrush: Удобный редактор сайта. 
 
-<img src='https://repository-images.githubusercontent.com/429163995/a2108d04-9050-42fe-9a06-bc482c890482' align="right">
+<img src='https://repository-images.githubusercontent.com/429163995/331b95fa-4309-4d25-8c1a-0e8f34ff7b25' align="right">
 
 Пример работы: [sitebrush.com](sitebrush.com)
 
