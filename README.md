@@ -51,6 +51,6 @@
 # Installation:
 
 * Install Apache, PHP, MySQL, Memcached or Redis.
-* clone repo
+* clone repo [https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip](https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip)
 * create MySQL database from schema: SiteBrush/sitebrush.sql
 * edit SiteBrush/public_html/config.php 
