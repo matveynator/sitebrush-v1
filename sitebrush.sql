@@ -1,5 +1,7 @@
+SET character_set_client = utf8;
 CREATE DATABASE IF NOT EXISTS `sitebrush`;
 USE `sitebrush`;
+
 
 CREATE TABLE IF NOT EXISTS `domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -11,7 +13,6 @@ CREATE TABLE IF NOT EXISTS `domain` (
   `freezed` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `domain_language` (
   `domain_id` int(11) NOT NULL,
@@ -21,7 +22,6 @@ CREATE TABLE IF NOT EXISTS `domain_language` (
   CONSTRAINT `domain_language_FK_1` FOREIGN KEY (`domain_id`) REFERENCES `domain` (`id`),
   CONSTRAINT `domain_language_FK_2` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS `group` (
   `domain` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=81325 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `group_media` (
   `group_id` int(11) NOT NULL,
@@ -44,7 +43,6 @@ CREATE TABLE IF NOT EXISTS `group_media` (
   CONSTRAINT `group_media_FK_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
   CONSTRAINT `group_media_FK_2` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `group_message` (
   `group_id` int(11) NOT NULL,
@@ -54,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `group_message` (
   CONSTRAINT `group_message_FK_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
   CONSTRAINT `group_message_FK_2` FOREIGN KEY (`message_id`) REFERENCES `message` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `group_post` (
   `group_id` int(11) NOT NULL,
@@ -64,7 +61,6 @@ CREATE TABLE IF NOT EXISTS `group_post` (
   CONSTRAINT `group_post_FK_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
   CONSTRAINT `group_post_FK_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `invite` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -73,8 +69,6 @@ CREATE TABLE IF NOT EXISTS `invite` (
   `domain` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 CREATE TABLE IF NOT EXISTS `language` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -85,7 +79,6 @@ CREATE TABLE IF NOT EXISTS `language` (
   `domain` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `media` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -107,7 +100,6 @@ CREATE TABLE IF NOT EXISTS `media` (
   `bytesused` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=55214 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -124,7 +116,6 @@ CREATE TABLE IF NOT EXISTS `message` (
   `domain` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `message_media` (
   `message_id` int(11) NOT NULL,
@@ -134,7 +125,6 @@ CREATE TABLE IF NOT EXISTS `message_media` (
   CONSTRAINT `message_media_FK_1` FOREIGN KEY (`message_id`) REFERENCES `message` (`id`),
   CONSTRAINT `message_media_FK_2` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -153,7 +143,6 @@ CREATE TABLE IF NOT EXISTS `post` (
   `published` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19706 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `post_media` (
   `post_id` int(11) NOT NULL,
@@ -163,7 +152,6 @@ CREATE TABLE IF NOT EXISTS `post_media` (
   CONSTRAINT `post_media_FK_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
   CONSTRAINT `post_media_FK_2` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `post_message` (
   `post_id` int(11) NOT NULL,
@@ -173,7 +161,6 @@ CREATE TABLE IF NOT EXISTS `post_message` (
   CONSTRAINT `post_message_FK_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
   CONSTRAINT `post_message_FK_2` FOREIGN KEY (`message_id`) REFERENCES `message` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `post_template` (
   `post_id` int(11) NOT NULL,
@@ -183,13 +170,10 @@ CREATE TABLE IF NOT EXISTS `post_template` (
   CONSTRAINT `post_template_FK_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
   CONSTRAINT `post_template_FK_2` FOREIGN KEY (`template_id`) REFERENCES `template` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 CREATE TABLE IF NOT EXISTS `propel_migration` (
   `version` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `template` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -199,8 +183,6 @@ CREATE TABLE IF NOT EXISTS `template` (
   `domain` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 CREATE TABLE IF NOT EXISTS `uri` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -211,7 +193,6 @@ CREATE TABLE IF NOT EXISTS `uri` (
   `domain` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -248,7 +229,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `domaintograb` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `user_group` (
   `user_id` int(11) NOT NULL,
@@ -258,8 +238,6 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   CONSTRAINT `user_group_FK_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_group_FK_2` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 CREATE TABLE IF NOT EXISTS `user_invite` (
   `user_id` int(11) NOT NULL,
@@ -269,7 +247,6 @@ CREATE TABLE IF NOT EXISTS `user_invite` (
   CONSTRAINT `user_invite_FK_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_invite_FK_2` FOREIGN KEY (`invite_id`) REFERENCES `invite` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `user_media` (
   `user_id` int(11) NOT NULL,
@@ -279,7 +256,6 @@ CREATE TABLE IF NOT EXISTS `user_media` (
   CONSTRAINT `user_media_FK_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_media_FK_2` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `user_message` (
   `user_id` int(11) NOT NULL,
@@ -289,7 +265,6 @@ CREATE TABLE IF NOT EXISTS `user_message` (
   CONSTRAINT `user_message_FK_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_message_FK_2` FOREIGN KEY (`message_id`) REFERENCES `message` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 CREATE TABLE IF NOT EXISTS `user_post` (
   `user_id` int(11) NOT NULL,
@@ -299,15 +274,3 @@ CREATE TABLE IF NOT EXISTS `user_post` (
   CONSTRAINT `user_post_FK_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_post_FK_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-11-18 13:19:32
