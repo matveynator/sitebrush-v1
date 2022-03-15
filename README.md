@@ -2,6 +2,21 @@
 
 <img src='https://repository-images.githubusercontent.com/429163995/331b95fa-4309-4d25-8c1a-0e8f34ff7b25' align="right">
 
+# Installation:
+
+* Install Apache, PHP, MySQL, Memcached or Redis.
+* clone repo [https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip](https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip)
+* create MySQL database from schema: SiteBrush/sitebrush.sql
+* edit SiteBrush/public_html/config.php 
+
+
+# Установка одной командой Debian 10, 11: 
+после установки вся важная информация (пути и пароли) записывается в файл: /etc/info
+
+```
+curl -L https://raw.githubusercontent.com/matveynator/sitebrush-docker/main/install.sh | sudo bash
+```
+
 ## Demo: [sitebrush.com](http://sitebrush.com)
 
 Мы убеждены, что Вы имеете право редактировать Ваш сайт целиком, не держа при этом в голове кучу лишней информации и возможно ненужных знаний таких как ftp доступы, теги вставки содержимого различных CMS, парадигмы редактирования шаблонов разных CMS, расположение файлов на сервере и многого другого чем мучают современных вебмастеров. Никто не против чтобы Вы все это знали, sitebrush лишь решает рутинные технические вопросы, чтобы Вы могли сосредоточиться на ... творчестве!
@@ -47,10 +62,3 @@
 
 * Магия номер 4:  "Заморозка". Нажимая на кнопку "заморозка" последующие изменения на сайте будут видно только Вам. Ваши посетители не увидят досадных ошибок пока Вы все не перепроверите и не опубликуете окончательную версию. Вам это обязательно понравится! 
 
-
-# Installation:
-
-* Install Apache, PHP, MySQL, Memcached or Redis.
-* clone repo [https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip](https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip)
-* create MySQL database from schema: SiteBrush/sitebrush.sql
-* edit SiteBrush/public_html/config.php 
