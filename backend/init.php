@@ -87,8 +87,8 @@ ini_set("session.cookie_httponly", 0);
 ini_set("session.gc_maxlifetime", $configuration['cookie_lifetime_sec']);
 ini_set("session.cookie_lifetime", $configuration['cookie_lifetime_sec']);
 ini_set("session.cache_expire", $configuration['cookie_lifetime_sec']);
-//ini_set("session.cookie_domain", "{$configuration['domain']}");
-ini_set("session.cookie_domain", "none");
+ini_set("session.cookie_domain", "{$configuration['domain']}");
+//ini_set("session.cookie_domain", "none");
 ini_set("error_log", "{$configuration['path']['log']}/error.log");
 ini_set("date.timezone", $configuration['date.timezone']);
 ini_set("upload_max_filesize", $configuration['upload_max_filesize']);
@@ -118,6 +118,7 @@ foreach ($configuration['path'] as $name => $path) {
  */
 if (PHP_SAPI !== 'cli') {
 
+/*
        session_set_cookie_params([
             'lifetime' => 3600,
             'path' => '/',
@@ -126,6 +127,7 @@ if (PHP_SAPI !== 'cli') {
             'httponly' => 1,
             'samesite' => 0
         ]);
+*/
 	session_start();
 }
 
