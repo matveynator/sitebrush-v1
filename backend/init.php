@@ -17,7 +17,7 @@ if (PHP_SAPI === 'cli') {
 	ini_set("memory_limit", $configuration['upload_max_filesize']);
 	$subdomain_name = implode(array_slice(explode('.', $_SERVER['HTTP_HOST']), - 3, 1, TRUE));
 	if (((count(explode('.', $_SERVER['HTTP_HOST'])))>2) and (isset($subdomain_name)) and ($subdomain_name != "") and ($subdomain_name != "www")) {
-		$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 3));
+		$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 2));
 		//echo "<br>1<pre>";
 		//echo $configuration['domain'];
 	} else {
@@ -142,9 +142,20 @@ if (PHP_SAPI !== 'cli') {
 	 */
 	require_once("{$configuration['backend']['libraries']}/includes/manual/pre-start.php");
 	/*
-	   Parse $_SERVER['REQUEST_URI'] string.
-	   and set http://domain.com/>>$url_path[1]<</>>$url_path[2]<</>>$url_path[3]<</ etc...
+		Parse $_SERVER['REQUEST_URI'] string.
+		and set http://domain.com/>>$url_path[1]<</>>$url_path[2]<</>>$url_path[3]<</ etc...
 	 */
+
+	//redirect any >2 level domain to 2 level domain
+	if (((count(explode('.', $_SERVER['HTTP_HOST'])))>2) and (isset($subdomain_name)) and ($subdomain_name != "") and ($subdomain_name != "www")) {
+		$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 2));
+		if ($_SERVER['HTTP_SCHEME'] == 'https') {
+			Jump("https://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
+		} else {
+			Jump("http://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
+		}
+	}
+
 	if (PHP_SAPI !== 'cli') {
 		$url = parse_url($_SERVER['REQUEST_URI']);
 		$url_path = explode("/", "$url[path]");
