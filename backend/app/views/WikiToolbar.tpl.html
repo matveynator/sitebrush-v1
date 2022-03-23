@@ -60,7 +60,7 @@ html #footpanel ul li a.active { /*--Active state when subpanel is open--*/
 
 
 #footpanel a.up{	
-	background: url(http://[[$Domain]]/[[$StaticFolder]]/static/arrow-left-up.png) no-repeat center center;
+	background: url(/[[$StaticFolder]]/static/arrow-left-up.png) no-repeat center center;
         [[if $Freezed eq 1]]
 	border-right: 1px solid #c4dfe2;
         [[else]]
@@ -70,12 +70,12 @@ html #footpanel ul li a.active { /*--Active state when subpanel is open--*/
 }
 
 #footpanel a.edit{        
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/pencil.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/pencil.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 #footpanel a.properties{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/cog.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/cog.png) no-repeat center center;
         [[if $Freezed eq 1]]
         border-right: 1px solid #c4dfe2;
         [[else]]
@@ -85,28 +85,28 @@ html #footpanel ul li a.active { /*--Active state when subpanel is open--*/
 }  
 
 #footpanel a.delete{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/cross.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/cross.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 #footpanel a.freeze{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/freeze.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/freeze.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 #footpanel a.unfreeze{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/publish.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/publish.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 
 #footpanel a.revision{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/revisions.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/revisions.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 #footpanel a.deleted{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/arrow_undo.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/arrow_undo.png) no-repeat center center;
         [[if $Freezed eq 1]]
         border-right: 1px solid #c4dfe2;
         [[else]]
@@ -116,22 +116,22 @@ html #footpanel ul li a.active { /*--Active state when subpanel is open--*/
 }
 
 #footpanel a.subpages{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/tree.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/tree.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 #footpanel a.new_subpage{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/add.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/add.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 #footpanel a.copy{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/copy.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/copy.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
 }
 
 #footpanel a.profile{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/profile.png) no-repeat center center;
+        background: url(/[[$StaticFolder]]/static/profile.png) no-repeat center center;
         text-indent: 0; /*--Reset text indent--*/
         [[if $Freezed eq 1]]
         border-left: 1px solid #c4dfe2;
@@ -142,7 +142,7 @@ html #footpanel ul li a.active { /*--Active state when subpanel is open--*/
 }
 
 #footpanel a.sign-out{
-        background: url(http://[[$Domain]]/[[$StaticFolder]]/static/sign-out.png) no-repeat right center;
+        background: url(/[[$StaticFolder]]/static/sign-out.png) no-repeat right center;
         [[if $Freezed eq 1]]
         border-left: 1px solid #c4dfe2;
         [[else]]
@@ -157,7 +157,7 @@ html #footpanel ul li a.active { /*--Active state when subpanel is open--*/
 #footpanel a small {  /*--panel tool tip styles--*/
 	text-align: center;
 	width: 110px;
-	background: url(http://[[$Domain]]/[[$StaticFolder]]/static/pop_arrow.png) no-repeat center bottom;
+	background: url(/[[$StaticFolder]]/static/pop_arrow.png) no-repeat center bottom;
 	padding: 5px 5px 11px;
 	display: none; /*--Hide by default--*/
 	color: #fff;
@@ -351,7 +351,7 @@ $(document).ready(function(){
 	<ul id="mainpanel">    	
 	[[if $LoggedIn eq TRUE ]]
 	[[if $RequestUri neq '/']]
-        <li><a href="http://[[$Domain]][[$PrePageUri]]" class="up"><small>Go one page up</small></a></li>
+        <li><a href="[[$PrePageUri]]" class="up"><small>Go one page up</small></a></li>
 	[[/if]]
 	[[/if]]
 	<li><a href="?edit" class="edit"><small>Edit</small></a></li>
@@ -375,7 +375,7 @@ $(document).ready(function(){
         [[/if]]
 
 	[[if $PageVersion > 0]]
-        <li><a href="http://[[$Domain]][[$NewUniqSubUri]]?edit" class="new_subpage"><small>Create new subpage</small></a></li>
+        <li><a href="[[$NewUniqSubUri]]?edit" class="new_subpage"><small>Create new subpage</small></a></li>
 	[[/if]]
 
 	[[if $SubUriAmmount > 0]]

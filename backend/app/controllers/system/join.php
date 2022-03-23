@@ -5,9 +5,10 @@
 //if (!isset($_SESSION['invited']) or ($_SESSION['invited'] == FALSE)) {
 //  Jump('/?invitation');
 //}
+
 if (!isset($_SESSION['LoggedIn']) or ($_SESSION['LoggedIn'] == FALSE)) {
 	if ($configuration['AdminUserRegistered'] == FALSE) {
-		exec("dig +short +trace {$configuration['domain']} |grep -e 'A ' -e 'CNAME ' |awk '{print$2}' ", $TracedARecord, $TracedAReturnCode);
+		exec("dig +short +trace {$configuration['domain']} |grep -e 'A ' -e 'CNAME ' | grep -v 'NS' | awk '{print$2}' ", $TracedARecord, $TracedAReturnCode);
 		if($TracedAReturnCode==0) {
 			if ((isset($TracedARecord['0'])) and (($TracedARecord['0'] == $configuration['ip'])or($TracedARecord['0'] == $configuration['master_domain'].'.'))) {
 				if (isset($_POST['register'])) {

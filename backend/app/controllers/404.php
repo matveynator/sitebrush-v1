@@ -8,12 +8,15 @@ if ((isset($SuperUserGroup)) and (AmIInGroup($SuperUserGroup->getId()))) {
 	if($RevisionsAmmount) {
 		$smarty->assign('RevisionsAmmount', $RevisionsAmmount);
 	}
-	if ($configuration['REQUEST_URI']==='/') {
-		$ThreadPages = PostQuery::create()->filterByType('Wiki')->filterByRequestUri("/%")->filterByDomain($configuration['domain'])->filterByStatus("Active")->find();
+//OШИБКА!!- пожирает всю память! надо сделать запрос поконкретнее чтобы все целиком не дергало
+
+/*
+ if ($configuration['REQUEST_URI']==='/') {
+$ThreadPages = PostQuery::create()->filterByType('Wiki')->filterByRequestUri("/%")->filterByDomain($configuration['domain'])->filterByStatus("Active")->find();
 	} else {
 		$ThreadPages = PostQuery::create()->filterByType('Wiki')->filterByRequestUri("{$configuration['REQUEST_URI']}/%")->filterByDomain($configuration['domain'])->filterByStatus("Active")->find();
 	}
-
+*/
 	if (count($ThreadPages) > 0) {
 		foreach ($ThreadPages as $ThreadPage) {
 			$RequestUri = $ThreadPage->getRequestUri();

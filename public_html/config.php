@@ -5,7 +5,7 @@ $configuration['maintenance'] 		       = FALSE;
 $configuration['db']['name']                   = 'sitebrush';
 $configuration['db']['host']                   = '127.0.0.1';
 $configuration['db']['user']                   = 'sitebrush';
-$configuration['db']['pass']                   = 'PaSsWord';
+$configuration['db']['pass']                   = 'password';
 $configuration['db']['port']                   = '3306';
 
 //application related settings:

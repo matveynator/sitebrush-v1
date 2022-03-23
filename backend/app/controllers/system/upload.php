@@ -5,6 +5,20 @@
 $SuperUserGroup = GroupQuery::create()->filterByOwnerId(0)->filterByName($configuration['groups']['names']['system']['Superuser']['Name'])->filterByStatus('Active')->filterByDomain($configuration['domain'])->findOne();
 if ((isset($SuperUserGroup)) and (AmIInGroup($SuperUserGroup->getId()))) {
 
+        if ((isset($_GET['GetSizeSmall'])) and ($_GET['GetSizeSmall']=='1')) {
+		if (isset($_SESSION['upload']['sizeSmall'])) {
+                        $sizes = array(
+                                'small' => $_SESSION['upload']['sizeSmall'],
+                        );	
+		} else {
+			$sizes = array(
+        			'small' => 800,
+     			);
+		}
+
+			echo json_encode($sizes);
+        }
+
 	if ((isset($_POST['sizeSmall'])) and (ctype_digit($_POST['sizeSmall'])) and ($_POST['sizeSmall'] > 0) and ($_POST['sizeSmall'] <= '9999')) {
 		$_SESSION['upload']['sizeSmall'] = $_POST['sizeSmall'];
 	}

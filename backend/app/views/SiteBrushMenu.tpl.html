@@ -1,22 +1,5 @@
+<script src="/[[$StaticFolder]]/js/jquery/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
-
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-33729020-1']);
-_gaq.push(['_setDomainName', '.[[$Domain]]']);
-_gaq.push(['_setAllowLinker', true]);
-_gaq.push(['_trackPageview']);
-
-(function() {
- var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
- ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
- var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
- })();
-
-</script>
-<script src="http://[[$Domain]]/[[$StaticFolder]]/js/jquery/jquery.js" type="text/javascript"></script>
-<script type="text/javascript">
-
-$.noConflict();
 
 (function($) {
 
@@ -236,47 +219,47 @@ jQuery(document).ready(function($) {
 <div style="visibility: hidden" class="contextMenu" id="SiteBrushMenu">
 <ul>
 [[if $_SERVER.REQUEST_URI !='/' ]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/arrow-left-up.png"  border="0"/> <a href="[[$PathUri.dirname]]" class="SiteBrushContextMenu">Наверх</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/arrow-left-up.png"  border="0"/> <a href="[[$PathUri.dirname]]" class="SiteBrushContextMenu">Наверх</a></li>
 [[/if]]
 [[if $SubUriAmmount > 1]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/tree.png" border="0"/> <a href="?subpages" class="SiteBrushContextMenu">Подстраниц: [[$SubUriAmmount]]</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/tree.png" border="0"/> <a href="?subpages" class="SiteBrushContextMenu">Подстраниц: [[$SubUriAmmount]]</a></li>
 [[/if]]
 <li>&nbsp;</li>
 
 
 [[if $PageVersion > 0]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/pencil.png"  border="0"/> <a href="?edit" class="SiteBrushContextMenu">Редактировать</a></li>
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/copy.png"  border="0"/> <a href="?grab" class="SiteBrushContextMenu">Копировать сайт</a></li>
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/cog.png" border="0"/> <a href="?properties" class="SiteBrushContextMenu">Свойства</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/pencil.png"  border="0"/> <a href="?edit" class="SiteBrushContextMenu">Редактировать</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/copy.png"  border="0"/> <a href="?grab" class="SiteBrushContextMenu">Копировать сайт</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/cog.png" border="0"/> <a href="?properties" class="SiteBrushContextMenu">Свойства</a></li>
 [[if $RevisionsAmmount > 0 ]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/revisions.png" border="0"/> <a href="?revisions" class="SiteBrushContextMenu">Ревизий: [[$RevisionsAmmount]]</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/revisions.png" border="0"/> <a href="?revisions" class="SiteBrushContextMenu">Ревизий: [[$RevisionsAmmount]]</a></li>
 [[/if]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/cross.png"  border="0"/> <a href="?delete=[[$PageId]]" class="SiteBrushContextMenu">Удалить</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/cross.png"  border="0"/> <a href="?delete=[[$PageId]]" class="SiteBrushContextMenu">Удалить</a></li>
 <li>&nbsp;</li>
 [[else]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/pencil.png"  border="0"/> <a href="?edit" class="SiteBrushContextMenu">Создать</a></li>
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/copy.png"  border="0"/> <a href="?grab" class="SiteBrushContextMenu">Копировать сайт</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$Domain]]/[[$StaticFolder]]/static/pencil.png"  border="0"/> <a href="?edit" class="SiteBrushContextMenu">Создать</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$Domain]]/[[$StaticFolder]]/static/copy.png"  border="0"/> <a href="?grab" class="SiteBrushContextMenu">Копировать сайт</a></li>
 [[if isset($DeletedRevisions)]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/arrow_undo.png" border="0"/> <a href="?revisions" class="SiteBrushContextMenu">Удалено: [[$DeletedRevisions]]</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/arrow_undo.png" border="0"/> <a href="?revisions" class="SiteBrushContextMenu">Удалено: [[$DeletedRevisions]]</a></li>
 [[/if]]
 <li>&nbsp;</li>
 [[/if]]
 [[if $Freezed == 1]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/publish.png" border="0"/> <a href="?unfreeze" class="SiteBrushContextMenu"><font color="#ff9900">Опубликовать!</font></a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/publish.png" border="0"/> <a href="?unfreeze" class="SiteBrushContextMenu"><font color="#ff9900">Опубликовать!</font></a></li>
 [[if $BackupExists == 1]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/backup.png" border="0"/> <a href="?backup" class="SiteBrushContextMenu">Скачать сайт</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/backup.png" border="0"/> <a href="?backup" class="SiteBrushContextMenu">Скачать сайт</a></li>
 [[/if]]
 <li>&nbsp;</li>
 
 [[else]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/freeze.png" border="0"/> <a href="?freeze" class="SiteBrushContextMenu">Заморозить</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/freeze.png" border="0"/> <a href="?freeze" class="SiteBrushContextMenu">Заморозить</a></li>
 [[if $BackupExists == 1]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/backup.png" border="0"/> <a href="?backup" class="SiteBrushContextMenu">Скачать сайт</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/backup.png" border="0"/> <a href="?backup" class="SiteBrushContextMenu">Скачать сайт</a></li>
 [[/if]]
 <li>&nbsp;</li>
 [[/if]]
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/profile.png" border="0"/> <a href="?profile" class="SiteBrushContextMenu">Учетная запись</a></li>
-<li class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/sign-out.png" border="0"/> <a href="?logout" class="SiteBrushContextMenu">Выйти</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/profile.png" border="0"/> <a href="?profile" class="SiteBrushContextMenu">Учетная запись</a></li>
+<li class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/sign-out.png" border="0"/> <a href="?logout" class="SiteBrushContextMenu">Выйти</a></li>
 <li>&nbsp;</li>
 <li id="help" class="SiteBrushContextMenu">&nbsp;<a href="http://sitebrush.reformal.ru" class="SiteBrushContextMenu">Нашли ошибку?</a></li>
 <li>&nbsp;</li>
@@ -286,7 +269,7 @@ jQuery(document).ready(function($) {
 [[else]]
 <div style="visibility:hidden" class="contextMenu" id="SiteBrushMenu">
 <ul>
-<li id="close" class="SiteBrushContextMenu">&nbsp;<img src="http://[[$Domain]]/[[$StaticFolder]]/static/lock.png" /> <a href="?login" class="SiteBrushContextMenu">Войти</a></li>
+<li id="close" class="SiteBrushContextMenu">&nbsp;<img src="/[[$StaticFolder]]/static/lock.png" /> <a href="?login" class="SiteBrushContextMenu">Войти</a></li>
 <li>&nbsp;</li>
 <li id="help" class="SiteBrushContextMenu">&nbsp;<a href="http://sitebrush.reformal.ru" class="SiteBrushContextMenu">Нашли ошибку?</a></li>
 <li>&nbsp;</li>
