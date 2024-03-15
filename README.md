@@ -10,12 +10,7 @@
 * edit SiteBrush/public_html/config.php 
 
 
-# Установка одной командой Debian 10, 11: 
-после установки вся важная информация (пути и пароли) записывается в файл: /etc/info
-
-```
-curl -L https://raw.githubusercontent.com/matveynator/sitebrush-docker/main/install.sh | sudo bash
-```
+# Установка одной командой в Docker: 
 
 ```
 docker run -d -p 80:80 -p 443:443 -v "/etc/timezone:/etc/timezone:ro" -v "/etc/localtime:/etc/localtime:ro" --restart=unless-stopped --name=sitebrush matveynator/sitebrush-v1:latest
