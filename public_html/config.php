@@ -14,8 +14,8 @@ $configuration['path']['backend']              = '/opt/sitebrush.com/backend';
 $configuration['path']['var']     	       = '/opt/sitebrush.com/var'; 
 $configuration['path']['tmp']                  = '/tmp';
 
-$configuration['ip']                           = '46.4.4.46'; //'176.9.141.127';
-$configuration['master_domain']                = 'sitebrush.com';
+$configuration['ip']                           = '127.0.0.1';
+$configuration['master_domain']                = 'localhost';
 
 //memcache configuration (optional, but highly recommended)
 //apt-get install php5-memcache memcached 

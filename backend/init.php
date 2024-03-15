@@ -24,11 +24,11 @@ if (PHP_SAPI === 'cli') {
 		//echo $configuration['domain'];
 	} else {
 		if (((count(explode('.', $_SERVER['HTTP_HOST'])))>2) and (isset($subdomain_name)) and ($subdomain_name != "") and ($subdomain_name != "www")) {
-			$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 2));
+			$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 0));
 			//echo "<br>1<pre>";
 			//echo $configuration['domain'];
 		} else {
-			$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 2));
+			$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 0));
 			//echo "2<br><pre>";
 			//echo $configuration['domain'];
 		}
@@ -158,11 +158,11 @@ if (PHP_SAPI !== 'cli') {
 
 	//redirect any >2 level domain to 2 level domain except portnov.kmv.ru
 	if (((count(explode('.', $_SERVER['HTTP_HOST'])))>2) and (isset($subdomain_name)) and ($subdomain_name != "") and ($subdomain_name != "www") and ($configuration['domain'] != "portnov.kmv.ru")) {
-		$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 2));
+		$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 0));
 		if ($_SERVER['HTTP_SCHEME'] == 'https') {
-			Jump("https://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
+			//Jump("https://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
 		} else {
-			Jump("http://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
+			//Jump("http://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
 		}
 	}
 
