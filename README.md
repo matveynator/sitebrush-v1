@@ -17,6 +17,12 @@
 curl -L https://raw.githubusercontent.com/matveynator/sitebrush-docker/main/install.sh | sudo bash
 ```
 
+```
+docker run -d -p 80:80 -p 443:443 -v "/etc/timezone:/etc/timezone:ro" -v "/etc/localtime:/etc/localtime:ro" --restart=unless-stopped --name=sitebrush matveynator/sitebrush-v1:latest
+```
+
+
+
 ## Demo: [sitebrush.com](http://sitebrush.com)
 
 Мы убеждены, что Вы имеете право редактировать Ваш сайт целиком, не держа при этом в голове кучу лишней информации и возможно ненужных знаний таких как ftp доступы, теги вставки содержимого различных CMS, парадигмы редактирования шаблонов разных CMS, расположение файлов на сервере и многого другого чем мучают современных вебмастеров. Никто не против чтобы Вы все это знали, sitebrush лишь решает рутинные технические вопросы, чтобы Вы могли сосредоточиться на ... творчестве!
