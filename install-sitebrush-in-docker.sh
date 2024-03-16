@@ -1,7 +1,25 @@
 #!/bin/bash
 
+# Check if Docker is installed
+if ! [ -x "$(command -v docker)" ]; then
+  echo "Docker is not installed. Would you like to install it? (y/n)"
+  read install_docker
+  if [ "$install_docker" = "y" ]; then
+    echo "Installing Docker..."
+    # Commands to install Docker (you can customize this based on your system)
+    # For example, on Ubuntu:
+    sudo apt-get update
+    sudo apt-get install -y docker.io
+    # For other systems, refer to Docker documentation: https://docs.docker.com/get-docker/
+    echo "Docker installed successfully."
+  else
+    echo "Aborted. Exiting..."
+    exit 1
+  fi
+fi
+
 # Default values
-default_backup_dir="/backup"
+default_backup_dir="/backup/sitebrush"
 default_mailhub="smtp.gmail.com:587"
 default_email="example@gmail.com"
 default_auth_user="example@gmail.com"
@@ -11,9 +29,10 @@ default_host_port=80
 # Interactively prompt for backup directory
 read -p "Enter backup directory path (default: $default_backup_dir): " backup_dir
 backup_dir=${backup_dir:-$default_backup_dir}
+mkdir -p "${backup_dir}/mysql" "$backup_dir/data"
 
 # Create Docker volumes
-docker volume rm sitebrush_mysql_data sitebrush_site_data
+docker volume rm sitebrush_mysql_data sitebrush_site_data &> /dev/null
 docker volume create --opt type=none --opt device="$backup_dir/mysql" --opt o=bind sitebrush_mysql_data
 docker volume create --opt type=none --opt device="$backup_dir/data" --opt o=bind sitebrush_site_data
 
