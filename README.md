@@ -4,19 +4,13 @@
 
 # Installation:
 
-* Install Apache, PHP, MySQL, Memcached or Redis.
-* clone repo [https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip](https://github.com/matveynator/SiteBrush/archive/refs/tags/v1.0.zip)
-* create MySQL database from schema: SiteBrush/sitebrush.sql
-* edit SiteBrush/public_html/config.php 
-
-
-# Скрипт установки в Docker: 
+## Скрипт установки в Docker: 
 
 ```
 apt-get update; apt-get -y install curl docker.io; curl -L https://raw.githubusercontent.com/matveynator/sitebrush-v1/master/install-sitebrush-in-docker.sh > /tmp/install-sitebrush-in-docker.sh; bash /tmp/install-sitebrush-in-docker.sh;
 ```
 
-# Ручная установка в Docker:
+## Ручная установка в Docker:
 ```
 mkdir -p /backup/sitebrush/mysql /backup/sitebrush/data
 docker volume rm sitebrush_mysql_data sitebrush_site_data
@@ -24,9 +18,6 @@ docker volume create --opt type=none --opt device=/backup/sitebrush/mysql --opt 
 docker volume create --opt type=none --opt device=/backup/sitebrush/data --opt o=bind sitebrush_site_data
 docker run -d -p 80:80 -v "/etc/timezone:/etc/timezone:ro" -v "/etc/localtime:/etc/localtime:ro" -v sitebrush_mysql_data:/var/lib/mysql -v sitebrush_site_data:/opt/sitebrush.com -e MAILHUB="smtp.gmail.com:587" -e EMAIL="example@gmail.com" -e DOMAIN="gmail.com" -e AUTH_USER="example@gmail.com" -e AUTH_PASS="PASSWORD" --restart=unless-stopped --name=sitebrush matveynator/sitebrush-v1:latest
 ```
-
-
-
 
 
 ## Demo: [sitebrush.com](http://sitebrush.com)
