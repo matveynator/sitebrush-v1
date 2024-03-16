@@ -13,7 +13,7 @@
 # Установка одной командой в Docker: 
 
 ```
-docker run -d -p 80:80 -p 443:443 -v "/etc/timezone:/etc/timezone:ro" -v "/etc/localtime:/etc/localtime:ro" --restart=unless-stopped --name=sitebrush matveynator/sitebrush-v1:latest
+apt-get update; apt-get -y install curl docker.io; curl -L https://raw.githubusercontent.com/matveynator/sitebrush-v1/master/install-sitebrush-in-docker.sh > /tmp/install-sitebrush-in-docker.sh; bash /tmp/install-sitebrush-in-docker.sh;
 ```
 
 
