@@ -4,13 +4,13 @@
 
 # Installation:
 
-## Скрипт установки в Docker: 
+## Скрипт простой установки в Docker под Linux Debian / Ubuntu: 
 
 ```
 apt-get update; apt-get -y install curl docker.io; curl -L https://raw.githubusercontent.com/matveynator/sitebrush-v1/master/install-sitebrush-in-docker.sh > /tmp/install-sitebrush-in-docker.sh; bash /tmp/install-sitebrush-in-docker.sh;
 ```
 
-## Ручная установка в Docker:
+## Продвинутая ручная установка:
 ```
 mkdir -p /backup/sitebrush/mysql /backup/sitebrush/data
 docker volume rm sitebrush_mysql_data sitebrush_site_data
