@@ -142,6 +142,7 @@ if (PHP_SAPI !== 'cli') {
 //echo "<pre>";
 //print_r(ini_get_all());
 //print_r($configuration);
+//print_r($_SESSION)
 //exit();
 
 
