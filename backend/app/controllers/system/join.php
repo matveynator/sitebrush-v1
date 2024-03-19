@@ -9,8 +9,6 @@
 if (!isset($_SESSION['LoggedIn']) or ($_SESSION['LoggedIn'] == FALSE)) {
 	if ($configuration['AdminUserRegistered'] == FALSE) {
 //		exec("dig +short +trace {$configuration['domain']} |grep -e 'A ' -e 'CNAME ' | grep -v 'NS' | awk '{print$2}' ", $TracedARecord, $TracedAReturnCode);
-//		if($TracedAReturnCode==0) {
-//			if ((isset($TracedARecord['0'])) and (($TracedARecord['0'] == $configuration['ip'])or($TracedARecord['0'] == $configuration['master_domain'].'.'))) {
 				if (isset($_POST['register'])) {
 
 					/*
@@ -77,8 +75,8 @@ if (!isset($_SESSION['LoggedIn']) or ($_SESSION['LoggedIn'] == FALSE)) {
 							$PGroup->addUser($User);
 							$PGroup->Save();
 						}
-
-
+						
+						setcookie("dynamic", "yes", time()+(24*3600*365*5), "/");
 						$_SESSION['LoggedIn']     = TRUE;
 						$_SESSION['JustLoggedIn'] = TRUE;
 						$_SESSION['UserId']       = $User->getId();
@@ -93,16 +91,6 @@ if (!isset($_SESSION['LoggedIn']) or ($_SESSION['LoggedIn'] == FALSE)) {
 					$smarty->display("Join.tpl.html");
 
 				}
-/*			} else {
-
-				$_SESSION['system_message'] = "Чтобы начать использование редактора sitebrush<br> вам необходимо настройть запись DNS сайта <strong>{$configuration['domain']}</strong>: <br><br><br><code>@ IN A {$configuration['ip']}<br><br>www IN A {$configuration['ip']}</code><br><br><br>Пожалуйста передайте данное сообщение своему системному администратору если вы не знаете как настраивать DNS.";
-				PrintSystemMessage('ок', '');
-
-
-
-			}
-*/
-//		}
 	} else {
 		$_SESSION['system_message'] = $dic['Error_Admin_allready_registered_d'];
 		PrintSystemMessage();

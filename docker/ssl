@@ -4,8 +4,8 @@ server {
 #	ssl_certificate /root/.acme.sh/sitebrush.com_ecc/fullchain.cer;
 #	ssl_certificate_key /root/.acme.sh/sitebrush.com_ecc/sitebrush.com.key;
 	server_name_in_redirect off;
-	error_log /var/log/nginx/error.log;
-	access_log /var/log/nginx/access.log;
+	error_log /dev/stderr info;
+	access_log /dev/stdout;
 	proxy_redirect     off;
 	proxy_set_header   scheme	    $scheme;
 	proxy_set_header   Host             $host;

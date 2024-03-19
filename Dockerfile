@@ -67,5 +67,5 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
     CMD service memcached status || exit 1
 
 
-# Запускаем сервисы и инициализируем базу данных
-CMD service memcached start && service mariadb start && mysqladmin --wait=30 ping &&  echo "CREATE USER 'sitebrush'@'localhost' IDENTIFIED BY 'password'; GRANT ALL PRIVILEGES ON *.* TO 'sitebrush'@'localhost'; FLUSH PRIVILEGES;" |mysql &> /dev/null &&service apache2 start && service nginx start && mysql -u root < /tmp/sitebrush.sql && /tmp/ssmtp.sh && while true; do sleep 1; done
+# Запускаем сервисы и инициализируем базу данны
+CMD service memcached start && service mariadb start &&service apache2 start && service nginx start && mysqladmin --wait=30 ping && mysql -u root < /tmp/sitebrush.sql && /tmp/ssmtp.sh && while true; do sleep 1; done

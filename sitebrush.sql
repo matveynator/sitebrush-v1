@@ -1,5 +1,10 @@
 SET character_set_client = utf8;
 
+CREATE USER IF NOT EXISTS 'sitebrush'@'localhost' IDENTIFIED BY 'password'; 
+GRANT ALL PRIVILEGES ON *.* TO 'sitebrush'@'localhost'; 
+FLUSH PRIVILEGES;
+
+
 CREATE DATABASE IF NOT EXISTS `sitebrush`;
 USE `sitebrush`;
 

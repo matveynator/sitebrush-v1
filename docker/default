@@ -1,8 +1,10 @@
 server {
 	listen   *:80;
 	server_name_in_redirect off;
-	error_log /var/log/nginx/error.log;
-	access_log /var/log/nginx/access.log;
+	#error_log /var/log/nginx/error.log;
+	#access_log /var/log/nginx/access.log;
+	error_log /dev/stderr info;
+	access_log /dev/stdout;
 	proxy_redirect     off;
 	proxy_set_header   Host             $host;
 	proxy_set_header   X-Real-IP        $remote_addr;

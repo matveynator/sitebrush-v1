@@ -17,7 +17,6 @@ if ((!isset($_SESSION['LoggedIn'])) or ($_SESSION['LoggedIn'] == FALSE)) {
 			$_SESSION['Email']        = $User->getEmail();
 			$_SESSION['AvatarId']     = $User->getAvatarId();
 			$_SESSION['Activated']    = $User->getActivated();
-			//setcookie("dynamic", "yes", time()+(24*3600*365*5), "/", $configuration['domain']);
 			setcookie("dynamic", "yes", time()+(24*3600*365*5), "/");
 		}
 		if((isset($_SESSION['edit-login-edit']))and($_SESSION['edit-login-edit']==TRUE)) {

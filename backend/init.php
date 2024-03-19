@@ -15,24 +15,7 @@ if (PHP_SAPI === 'cli') {
 	ini_set("memory_limit", $configuration['upload_max_filesize']);
 } else {
 	ini_set("memory_limit", $configuration['upload_max_filesize']);
-	$subdomain_name = implode(array_slice(explode('.', $_SERVER['HTTP_HOST']), - 3, 1, TRUE));
-
-	//исключение домен вадима портнова
-	if ($_SERVER['HTTP_HOST'] == "portnov.kmv.ru") {
-		$configuration['domain'] = "portnov.kmv.ru";
-		//echo "<br>0<pre>";
-		//echo $configuration['domain'];
-	} else {
-		if (((count(explode('.', $_SERVER['HTTP_HOST'])))>2) and (isset($subdomain_name)) and ($subdomain_name != "") and ($subdomain_name != "www")) {
-			$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 0));
-			//echo "<br>1<pre>";
-			//echo $configuration['domain'];
-		} else {
-			$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 0));
-			//echo "2<br><pre>";
-			//echo $configuration['domain'];
-		}
-	}
+	$configuration['domain'] = $_SERVER['HTTP_HOST'];
 }
 
 
@@ -55,7 +38,6 @@ if ((PHP_SAPI !== 'cli')and($configuration['domain']!==$configuration['master_do
 			<h1>Мы дорабатываем программное обеспечение сайта {$configuration['domain']}</h1>
 			Редактор SiteBrush заработает через некоторое время.<br>
 			<a href=''>Обновите страницу вручную</a> или подождите немного и все наладится само собой.<br><br>
-			Телефон для экстренной связи с разработчиком: <b>+7 (928) 819-50-14</b>
 			</body>
 			";
 		exit();
@@ -90,14 +72,12 @@ if ((ini_get('session.save_handler'))==='memcache') {
 }
 ini_set("session.name", "BONJOUR");
 ini_set("session.use_cookies", 1);
-ini_set("session.use_only_cookies", 0);
-ini_set("session.cookie_httponly", 0);
+ini_set("session.use_only_cookies", 1);
+ini_set("session.cookie_httponly", 1);
 ini_set("session.gc_maxlifetime", $configuration['cookie_lifetime_sec']);
 ini_set("session.cookie_lifetime", $configuration['cookie_lifetime_sec']);
 ini_set("session.cache_expire", $configuration['cookie_lifetime_sec']);
-ini_set("session.cookie_domain", "{$configuration['domain']}");
-//ini_set("session.cookie_domain", "none");
-ini_set("error_log", "{$configuration['path']['log']}/error.log");
+ini_set("error_log", "syslog");
 ini_set("date.timezone", $configuration['date.timezone']);
 ini_set("upload_max_filesize", $configuration['upload_max_filesize']);
 ini_set("upload_tmp_dir", $configuration['path']['tmp']);
@@ -125,25 +105,8 @@ foreach ($configuration['path'] as $name => $path) {
    Start session:
  */
 if (PHP_SAPI !== 'cli') {
-
-/*
-       session_set_cookie_params([
-            'lifetime' => 3600,
-            'path' => '/',
-            'domain' => $_SERVER['HTTP_HOST'],
-            'secure' => 1,
-            'httponly' => 1,
-            'samesite' => 0
-        ]);
-*/
 	session_start();
 }
-
-//echo "<pre>";
-//print_r(ini_get_all());
-//print_r($configuration);
-//print_r($_SESSION)
-//exit();
 
 
 if (PHP_SAPI !== 'cli') {
@@ -156,16 +119,6 @@ if (PHP_SAPI !== 'cli') {
 		Parse $_SERVER['REQUEST_URI'] string.
 		and set http://domain.com/>>$url_path[1]<</>>$url_path[2]<</>>$url_path[3]<</ etc...
 	 */
-
-	//redirect any >2 level domain to 2 level domain except portnov.kmv.ru
-	if (((count(explode('.', $_SERVER['HTTP_HOST'])))>2) and (isset($subdomain_name)) and ($subdomain_name != "") and ($subdomain_name != "www") and ($configuration['domain'] != "portnov.kmv.ru")) {
-		$configuration['domain'] = implode('.', array_slice(explode('.', $_SERVER['HTTP_HOST']), - 0));
-		if ($_SERVER['HTTP_SCHEME'] == 'https') {
-			//Jump("https://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
-		} else {
-			//Jump("http://${configuration['domain']}{$_SERVER['REQUEST_URI']}");
-		}
-	}
 
 	if (PHP_SAPI !== 'cli') {
 		$url = parse_url($_SERVER['REQUEST_URI']);
