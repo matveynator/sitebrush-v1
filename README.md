@@ -43,9 +43,3 @@ Installing SiteBrush allows you to edit your website online without the need for
 - Automatic import of all necessary files.
 - Support for changing page addresses without 404 errors.
 - Freeze mode for editing and publishing without downtimes.
-
-
-
-
-* Магия номер 4:  "Заморозка". Нажимая на кнопку "заморозка" последующие изменения на сайте будут видно только Вам. Ваши посетители не увидят досадных ошибок пока Вы все не перепроверите и не опубликуете окончательную версию. Вам это обязательно понравится! 
-
